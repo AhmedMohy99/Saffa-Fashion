@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
+import './responsive.css';
 import { products, PRICE, SIZE_INFO } from '../lib-products';
 
 type ViewMode = 'circle' | 'grid';
@@ -40,7 +41,7 @@ export default function Home() {
       <header className="store-header saffa-navbar">
         <a className="saffa-brand" href="#top" aria-label="Saffa Fashion home"><img className="saffa-logo-image" src="/logo.jpeg" alt="Saffa Modesty" /></a>
         <nav className={`saffa-nav-links ${mobileMenuOpen ? 'mobile-open' : ''}`} aria-label="Main navigation">
-          <a href="#top" onClick={() => setMobileMenuOpen(false)}>Home</a><a href="#collection" onClick={() => setMobileMenuOpen(false)}>Collection</a><a href="/contact">Contact Us</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">WhatsApp</a>
+          <a href="#top" onClick={() => setMobileMenuOpen(false)}>Home</a><a href="#collection" onClick={() => setMobileMenuOpen(false)}>Collection</a><a href="/contact" onClick={() => setMobileMenuOpen(false)}>Contact Us</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">WhatsApp</a>
         </nav>
         <div className="header-actions"><button className="ask-ai" onClick={askAI}>Ask AI</button><button className="cart-button" onClick={() => setCartOpen(true)} aria-label={`Open cart, ${cartCount} items`}><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8a3 3 0 0 1 6 0"/></svg>{cartCount > 0 && <span className="cart-badge">{cartCount}</span>}</button><button className="mobile-menu-toggle" onClick={() => setMobileMenuOpen(value => !value)} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileMenuOpen}><span/><span/><span/></button></div>
       </header>
