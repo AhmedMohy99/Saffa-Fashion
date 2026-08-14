@@ -1,12 +1,98 @@
-/* Responsive gallery v2 — Row / Grid / Circle */
-.collection-section{padding:10px clamp(16px,5vw,72px) 90px!important;overflow:hidden}.collection-heading{max-width:1380px;margin:0 auto 28px;padding-top:15px;border-top:1px solid var(--line);display:flex;align-items:flex-end;justify-content:space-between;gap:30px}.collection-heading h2{margin:10px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:clamp(34px,4vw,58px);font-weight:400;line-height:.92;letter-spacing:-.05em}.collection-tools{display:flex;align-items:center;gap:18px;padding-bottom:2px}.collection-count{font-size:9px;font-weight:800;letter-spacing:.16em;color:var(--muted);white-space:nowrap}.view-toggle{display:flex;align-items:center;padding:3px;border-radius:999px;background:#e4e2da;gap:2px}.view-toggle button{border:0!important;background:transparent!important;color:#777!important;padding:9px 13px!important;border-radius:999px!important;font:700 10px/1 Arial,sans-serif!important;cursor:pointer;transition:all .22s ease!important}.view-toggle button.active{background:#111!important;color:#fff!important}
-.gallery-stage{position:relative;width:min(1180px,100%);height:680px;margin:0 auto;isolation:isolate;transition:height .35s ease}.gallery-stage .circle-ring{position:absolute;inset:11%;border:1px solid rgba(17,17,17,.10);border-radius:50%;pointer-events:none;transition:opacity .3s}.gallery-stage .circle-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:145px;height:145px;border-radius:50%;background:#ebe9e1;display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 16px 40px rgba(0,0,0,.05);z-index:1;transition:opacity .3s}.gallery-stage .circle-center span{font:800 9px/1 Arial,sans-serif;letter-spacing:.24em}.gallery-stage .circle-center strong{font:400 39px/1 Georgia,serif;margin:8px 0 5px}.gallery-stage .circle-center small{font:700 8px/1 Arial,sans-serif;letter-spacing:.2em;color:#999}.gallery-product{border:0!important;padding:0!important;background:transparent!important;color:inherit;cursor:pointer;position:absolute;z-index:4;display:flex;flex-direction:column;align-items:center;gap:7px;transition:top .65s cubic-bezier(.2,.8,.2,1),left .65s cubic-bezier(.2,.8,.2,1),width .45s ease,height .45s ease,transform .3s ease;will-change:top,left,transform}.gallery-image{display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid rgba(17,17,17,.08);box-shadow:0 12px 32px rgba(0,0,0,.10);overflow:hidden;transition:transform .22s ease,box-shadow .22s ease,border-radius .3s ease;width:var(--circle-size);height:calc(var(--circle-size) * 1.12);border-radius:16px}.gallery-image img{display:block!important;width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important;margin:0!important;padding:5px!important}.gallery-number{font:700 8px/1 Arial,sans-serif;color:#999}.gallery-hover-label{position:absolute;left:50%;bottom:32px;transform:translate(-50%,8px);min-width:max-content;max-width:220px;padding:7px 10px;border-radius:999px;background:#111;color:#fff;font:700 9px/1 Arial,sans-serif;opacity:0;pointer-events:none;transition:opacity .15s ease,transform .15s ease;white-space:nowrap}.gallery-product:hover{z-index:20;transform:translateY(-4px)}.gallery-product:hover .gallery-image{transform:scale(1.04);box-shadow:0 18px 42px rgba(0,0,0,.16)}.gallery-product:hover .gallery-hover-label,.gallery-product:focus-visible .gallery-hover-label{opacity:1;transform:translate(-50%,0)}
-.gallery-circle .gallery-product{top:var(--circle-top);left:var(--circle-left);width:var(--circle-size);height:auto;transform:translate(-50%,0)}.gallery-circle .gallery-product:hover{transform:translate(-50%,-4px) scale(1.04)}.gallery-circle .circle-ring,.gallery-circle .circle-center{opacity:1}
-.gallery-grid .gallery-stage{height:auto;min-height:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:44px 24px;align-items:start}.gallery-grid .circle-ring,.gallery-grid .circle-center{opacity:0;pointer-events:none}.gallery-grid .gallery-product{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto!important;transform:none!important;display:flex}.gallery-grid .gallery-image{width:100%;height:auto;aspect-ratio:4/5;border-radius:0}.gallery-grid .gallery-product:hover{transform:translateY(-5px)!important}.gallery-grid .gallery-hover-label{bottom:70px}.gallery-grid .gallery-number{position:absolute;top:12px;left:12px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;color:#111}
-.gallery-row .gallery-stage{height:360px;display:flex;align-items:flex-start;gap:22px;overflow-x:auto;overflow-y:hidden;padding:18px 4px 30px;scroll-snap-type:x proximity}.gallery-row .circle-ring,.gallery-row .circle-center{opacity:0;pointer-events:none}.gallery-row .gallery-product{position:relative!important;top:auto!important;left:auto!important;flex:0 0 190px!important;width:190px!important;height:auto!important;transform:none!important;scroll-snap-align:start}.gallery-row .gallery-image{width:190px;height:238px;border-radius:16px}.gallery-row .gallery-product:hover{transform:translateY(-5px)!important}.gallery-row .gallery-hover-label{bottom:64px}
-.sheet-overlay{align-items:stretch!important;justify-content:flex-end!important;background:rgba(0,0,0,.28)!important}.product-sheet{width:min(420px,100vw)!important;height:100vh!important;max-height:none!important;border-radius:0!important;background:#fff!important;color:#111!important;padding:28px 24px 32px!important;overflow-y:auto!important;animation:productPanelIn .32s ease!important;box-shadow:-20px 0 60px rgba(0,0,0,.15)!important}@keyframes productPanelIn{from{transform:translateX(100%)}to{transform:translateX(0)}}.sheet-top{margin:0!important;align-items:flex-start!important}.sheet-top h2{font-size:clamp(30px,7vw,48px)!important;color:#111!important}.sheet-label{color:#777!important}.sheet-price{color:#111!important;font-size:14px!important}.sheet-close{width:38px;height:38px;border:1px solid var(--line)!important;border-radius:50%!important;color:#111!important;justify-content:center!important}.sheet-content{margin-top:20px!important}.sheet-main-image{width:100%;height:320px;background:#f7f6f2;border-radius:16px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:20px}.sheet-main-image img{width:100%;height:100%;object-fit:contain;padding:12px}.sheet-description{color:#444!important;font-size:13px!important;line-height:1.7!important}.sheet-arabic{color:#777!important;font-size:12px!important;line-height:1.8!important}.sheet-swatches{display:flex;gap:8px;margin:18px 0}.sheet-swatches button{width:54px;height:54px;border:1px solid var(--line);border-radius:8px;background:#fff;padding:3px;overflow:hidden}.sheet-swatches button.selected{border:2px solid #111}.sheet-swatches img{width:100%;height:100%;object-fit:contain}.add-cart-button{width:100%!important;border-radius:10px!important;background:#111!important;color:#fff!important;margin-top:22px!important}.add-cart-button:hover{background:#2b2b2b!important}.sheet-helper{text-align:center;color:#888;font-size:10px;margin:12px 0}.sheet-browse{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:15px;margin-top:8px}.sheet-browse button{border:0;background:transparent;font-size:10px;font-weight:800;color:#555}.sheet-browse button:hover{color:#111}
-.store-header{width:100%;height:72px;padding:8px clamp(16px,4vw,56px)!important;gap:24px}.saffa-brand{flex:0 0 72px!important;width:72px!important;height:56px!important}.saffa-logo-image{width:68px!important;height:50px!important;max-width:68px!important;max-height:50px!important;object-fit:contain!important;mix-blend-mode:multiply!important}
-@media (max-width:1100px){.gallery-stage{height:600px}.gallery-grid .gallery-stage{grid-template-columns:repeat(3,minmax(0,1fr));gap:34px 16px}.gallery-row .gallery-stage{height:330px}.gallery-row .gallery-product,.gallery-row .gallery-image{width:170px}.gallery-row .gallery-image{height:215px}}
-@media (max-width:800px){.store-header{height:64px!important;padding:7px 14px!important}.saffa-brand{flex-basis:58px!important;width:58px!important;height:50px!important}.saffa-logo-image{width:54px!important;height:44px!important;max-width:54px!important;max-height:44px!important}.gallery-stage{height:560px}.gallery-grid .gallery-stage{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 12px}.gallery-row .gallery-stage{height:310px;gap:14px}.gallery-row .gallery-product,.gallery-row .gallery-image{width:150px}.gallery-row .gallery-image{height:195px}.collection-heading{gap:16px}.collection-tools{gap:8px}.view-toggle button{padding:8px 10px!important}}
-@media (max-width:600px){.collection-section{padding-left:12px!important;padding-right:12px!important}.collection-heading{align-items:flex-end;margin-bottom:18px}.collection-heading h2{font-size:31px}.collection-tools{flex-direction:column;align-items:flex-end}.collection-count{font-size:8px}.gallery-stage{height:430px}.gallery-circle .gallery-image{border-radius:14px}.gallery-circle .circle-ring{inset:10%}.gallery-circle .circle-center{width:105px;height:105px}.gallery-circle .circle-center strong{font-size:30px}.gallery-grid .gallery-stage{gap:25px 9px}.gallery-grid .gallery-image{aspect-ratio:4/5}.gallery-row .gallery-stage{height:280px}.gallery-row .gallery-product,.gallery-row .gallery-image{width:132px}.gallery-row .gallery-image{height:174px}.gallery-hover-label{font-size:8px;max-width:180px}.product-sheet{padding:22px 16px 28px!important}.sheet-main-image{height:290px}.sheet-top h2{font-size:32px!important}.sheet-swatches button{width:48px;height:48px}.hero-section{min-height:auto!important;padding:56px 18px 45px!important;display:block!important}.hero-copy h1{font-size:clamp(52px,16vw,78px)!important}.hero-meta{margin-top:28px!important;align-items:flex-start!important}}
-@media (max-width:390px){.collection-heading h2{font-size:28px}.view-toggle button{padding:7px 8px!important;font-size:9px!important}.gallery-stage{height:390px}.gallery-circle .circle-center{width:92px;height:92px}.gallery-circle .circle-center strong{font-size:27px}.product-sheet{padding-left:13px!important;padding-right:13px!important}.sheet-main-image{height:250px}}
+/* Saffa Fashion — gallery polish / final responsive overrides */
+.collection-section{padding:18px clamp(16px,4vw,64px) 96px!important;overflow:hidden}
+.collection-heading{max-width:1240px;margin:0 auto 18px!important;padding-top:18px!important;align-items:center!important}
+.collection-heading h2{font-size:clamp(34px,3.7vw,56px)!important;line-height:.94!important}
+.collection-tools{gap:14px!important}
+.view-toggle{padding:3px!important;box-shadow:0 1px 0 rgba(0,0,0,.03)}
+.view-toggle button{min-width:48px!important;padding:8px 12px!important}
+
+.gallery-circle .gallery-stage{width:min(1040px,100%);height:650px;margin:0 auto;position:relative}
+.gallery-circle .circle-ring{inset:9% 12%!important;border-color:rgba(17,17,17,.09)!important}
+.gallery-circle .circle-center{width:118px!important;height:118px!important;background:#eeece5!important;box-shadow:0 18px 50px rgba(0,0,0,.07)!important}
+.gallery-circle .circle-center strong{font-size:34px!important}
+.gallery-circle .gallery-product{top:var(--circle-top)!important;left:var(--circle-left)!important;width:var(--circle-size)!important;height:auto!important;transform:translate(-50%,-50%)!important;transition:top .65s cubic-bezier(.22,.8,.2,1),left .65s cubic-bezier(.22,.8,.2,1),transform .25s ease!important}
+.gallery-circle .gallery-product:hover{transform:translate(-50%,-50%) scale(1.055)!important}
+.gallery-circle .gallery-image{width:var(--circle-size)!important;height:calc(var(--circle-size) * 1.24)!important;border-radius:18px!important;background:#fff!important;box-shadow:0 14px 34px rgba(0,0,0,.09)!important;padding:0!important}
+.gallery-circle .gallery-image img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center!important;padding:4px!important}
+.gallery-circle .gallery-number{margin-top:1px!important;font-size:8px!important}
+.gallery-circle .gallery-hover-label{bottom:34px!important}
+
+.gallery-circle .gallery-product:nth-of-type(1){--circle-top:9%!important;--circle-left:50%!important;--circle-size:150px!important}
+.gallery-circle .gallery-product:nth-of-type(2){--circle-top:25%!important;--circle-left:76%!important;--circle-size:132px!important}
+.gallery-circle .gallery-product:nth-of-type(3){--circle-top:58%!important;--circle-left:86%!important;--circle-size:146px!important}
+.gallery-circle .gallery-product:nth-of-type(4){--circle-top:84%!important;--circle-left:69%!important;--circle-size:126px!important}
+.gallery-circle .gallery-product:nth-of-type(5){--circle-top:88%!important;--circle-left:33%!important;--circle-size:148px!important}
+.gallery-circle .gallery-product:nth-of-type(6){--circle-top:62%!important;--circle-left:14%!important;--circle-size:130px!important}
+.gallery-circle .gallery-product:nth-of-type(7){--circle-top:27%!important;--circle-left:23%!important;--circle-size:140px!important}
+
+.gallery-grid .gallery-stage{width:min(1240px,100%);grid-template-columns:repeat(3,minmax(0,1fr));gap:48px 24px!important}
+.gallery-grid .gallery-image{aspect-ratio:4/5!important;border-radius:4px!important;background:#fff!important;box-shadow:none!important}
+.gallery-grid .gallery-image img{object-fit:contain!important;object-position:center top!important;padding:0!important}
+.gallery-grid .gallery-product:hover{transform:translateY(-4px)!important}
+.gallery-grid .gallery-hover-label{bottom:64px!important}
+
+.gallery-row .gallery-stage{width:100%;height:360px!important;gap:20px!important;padding:12px 2px 28px!important}
+.gallery-row .gallery-product{flex-basis:190px!important;width:190px!important}
+.gallery-row .gallery-image{width:190px!important;height:250px!important;border-radius:16px!important;background:#fff!important}
+.gallery-row .gallery-image img{object-fit:contain!important;padding:0!important}
+
+.store-header{height:70px!important;padding:7px clamp(16px,4vw,52px)!important}
+.saffa-brand{flex:0 0 56px!important;width:56px!important;height:52px!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;overflow:hidden!important}
+.saffa-logo-image{width:48px!important;height:44px!important;max-width:48px!important;max-height:44px!important;object-fit:contain!important;object-position:center!important;mix-blend-mode:multiply!important}
+.sheet-overlay{z-index:1000!important}
+.product-sheet{width:min(430px,100vw)!important}
+
+@media (max-width:900px){
+.gallery-circle .gallery-stage{height:570px;width:100%}
+.gallery-circle .circle-ring{inset:10% 9%!important}
+.gallery-circle .circle-center{width:104px!important;height:104px!important}
+.gallery-circle .circle-center strong{font-size:30px!important}
+.gallery-circle .gallery-product:nth-of-type(1){--circle-top:10%!important;--circle-left:50%!important;--circle-size:132px!important}
+.gallery-circle .gallery-product:nth-of-type(2){--circle-top:27%!important;--circle-left:78%!important;--circle-size:116px!important}
+.gallery-circle .gallery-product:nth-of-type(3){--circle-top:58%!important;--circle-left:84%!important;--circle-size:126px!important}
+.gallery-circle .gallery-product:nth-of-type(4){--circle-top:83%!important;--circle-left:68%!important;--circle-size:110px!important}
+.gallery-circle .gallery-product:nth-of-type(5){--circle-top:85%!important;--circle-left:32%!important;--circle-size:128px!important}
+.gallery-circle .gallery-product:nth-of-type(6){--circle-top:61%!important;--circle-left:16%!important;--circle-size:114px!important}
+.gallery-circle .gallery-product:nth-of-type(7){--circle-top:28%!important;--circle-left:22%!important;--circle-size:120px!important}
+}
+
+@media (max-width:600px){
+.collection-section{padding:14px 12px 70px!important}
+.collection-heading{margin-bottom:12px!important;align-items:flex-end!important}
+.collection-heading h2{font-size:30px!important}
+.collection-tools{gap:7px!important}
+.view-toggle button{min-width:42px!important;padding:7px 9px!important;font-size:9px!important}
+.gallery-circle .gallery-stage{height:500px!important}
+.gallery-circle .circle-ring{inset:10% 7%!important}
+.gallery-circle .circle-center{width:88px!important;height:88px!important}
+.gallery-circle .circle-center span{font-size:7px!important}
+.gallery-circle .circle-center strong{font-size:26px!important;margin:5px 0!important}
+.gallery-circle .circle-center small{font-size:7px!important}
+.gallery-circle .gallery-product:nth-of-type(1){--circle-top:10%!important;--circle-left:50%!important;--circle-size:105px!important}
+.gallery-circle .gallery-product:nth-of-type(2){--circle-top:28%!important;--circle-left:78%!important;--circle-size:94px!important}
+.gallery-circle .gallery-product:nth-of-type(3){--circle-top:58%!important;--circle-left:84%!important;--circle-size:102px!important}
+.gallery-circle .gallery-product:nth-of-type(4){--circle-top:82%!important;--circle-left:67%!important;--circle-size:88px!important}
+.gallery-circle .gallery-product:nth-of-type(5){--circle-top:84%!important;--circle-left:33%!important;--circle-size:104px!important}
+.gallery-circle .gallery-product:nth-of-type(6){--circle-top:60%!important;--circle-left:16%!important;--circle-size:92px!important}
+.gallery-circle .gallery-product:nth-of-type(7){--circle-top:29%!important;--circle-left:22%!important;--circle-size:96px!important}
+.gallery-circle .gallery-image{border-radius:14px!important;height:calc(var(--circle-size) * 1.2)!important}
+.gallery-circle .gallery-hover-label{display:none!important}
+.gallery-grid .gallery-stage{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 10px!important}
+.gallery-row .gallery-stage{height:260px!important}
+.gallery-row .gallery-product{flex-basis:138px!important;width:138px!important}
+.gallery-row .gallery-image{width:138px!important;height:184px!important}
+.store-header{height:62px!important;padding:6px 12px!important}
+.saffa-brand{flex-basis:50px!important;width:50px!important;height:48px!important}
+.saffa-logo-image{width:42px!important;height:40px!important;max-width:42px!important;max-height:40px!important}
+}
+
+@media (max-width:390px){
+.gallery-circle .gallery-stage{height:450px!important}
+.gallery-circle .gallery-product:nth-of-type(1){--circle-top:10%!important;--circle-size:94px!important}
+.gallery-circle .gallery-product:nth-of-type(2){--circle-top:28%!important;--circle-size:84px!important}
+.gallery-circle .gallery-product:nth-of-type(3){--circle-top:58%!important;--circle-size:90px!important}
+.gallery-circle .gallery-product:nth-of-type(4){--circle-top:81%!important;--circle-size:80px!important}
+.gallery-circle .gallery-product:nth-of-type(5){--circle-top:84%!important;--circle-size:92px!important}
+.gallery-circle .gallery-product:nth-of-type(6){--circle-top:60%!important;--circle-size:82px!important}
+.gallery-circle .gallery-product:nth-of-type(7){--circle-top:29%!important;--circle-size:86px!important}
+}
