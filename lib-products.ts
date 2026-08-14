@@ -11,4 +11,4 @@ export const products: Product[] = [
  {slug:'rose-layer',name:'Safa Rose Layered Dress',arName:'فستان صفا الوردي بطبقات',color:'Soft Rose',arColor:'وردي هادئ',image:'/products/safa-pink.png',description:'A modern soft-rose modest dress with a distinctive layered silhouette and a beautiful flowing full-length shape. A graceful statement piece for contemporary modest fashion.',arDescription:'فستان محتشم عصري باللون الوردي الهادئ، يتميز بقصة بطبقات وشكل انسيابي بطول كامل. قطعة أنيقة ولافتة للأزياء المحتشمة العصرية.'}
 ];
 export const SIZE_INFO = { L:'50–75 kg', XL:'75–110 kg' } as const;
-export const PRICE = 1000;
+export const PRICE = 700;
