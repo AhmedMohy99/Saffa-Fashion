@@ -2,11 +2,39 @@
 import { useState } from 'react';
 import { products, PRICE, SIZE_INFO } from '../../lib-products';
 
+const WHATSAPP_NUMBER = '201069473693';
+const INSTAGRAM_URL = 'https://www.instagram.com/_saffa_01/';
+const TIKTOK_URL = 'https://www.tiktok.com/@saffa_0190';
+
 export default function ContactPage(){
- const [product,setProduct]=useState(products[0].slug); const [size,setSize]=useState<'L'|'XL'>('L'); const [weight,setWeight]=useState('');
+ const [product,setProduct]=useState(products[0].slug);
+ const [size,setSize]=useState<'L'|'XL'>('L');
+ const [weight,setWeight]=useState('');
  const p=products.find(x=>x.slug===product)!;
- const message=`Hello Saffa Fashion, I would like to order:\n\nProduct: ${p.name}\nArabic: ${p.arName}\nColor: ${p.color} / ${p.arColor}\nPrice: ${PRICE} EGP\nSize: ${size}\nWeight: ${weight || 'Not provided'} kg\n\nPlease confirm availability and delivery details.`;
- const whatsapp='https://api.whatsapp.com/message/3RRGEUO5XNISD1?autoload=1&app_absent=0';
- const send=()=>{navigator.clipboard?.writeText(message); window.open(whatsapp,'_blank');};
- return <main className="contact"><div className="container"><div className="section-head"><div><div className="kicker">Saffa Fashion</div><h1 className="serif" style={{fontSize:'clamp(42px,7vw,72px)',margin:'10px 0'}}>Contact Us</h1></div><div className="section-sub arabic">تواصلي معنا واطلبي الفستان مباشرة عبر واتساب.</div></div><div className="contact-grid"><div className="contact-card"><h3>Place your order</h3><p>Choose your product and size. Your complete order message will be prepared automatically.</p><label className="option-label">Product / المنتج</label><select value={product} onChange={e=>setProduct(e.target.value)} style={{width:'100%',padding:'14px',border:'1px solid var(--line)',borderRadius:14,background:'#fff'}}>{products.map(x=><option value={x.slug} key={x.slug}>{x.name} — {x.color}</option>)}</select><label className="option-label">Size / المقاس</label><div className="size-row">{(['L','XL'] as const).map(s=><button key={s} onClick={()=>setSize(s)} className={`size-btn ${size===s?'active':''}`}><strong>{s}</strong><br/><small>{SIZE_INFO[s]}</small></button>)}</div><label className="option-label">Weight / الوزن (optional)</label><input value={weight} onChange={e=>setWeight(e.target.value)} placeholder="e.g. 68" style={{width:'100%',padding:'14px 16px',border:'1px solid var(--line)',borderRadius:14,background:'#fff'}}/><div className="weight-box"><strong>{p.name}</strong><br/>{p.arName}<br/>Color: {p.color}<br/>Price: {PRICE.toLocaleString()} EGP<br/>Size: {size} · {SIZE_INFO[size]}</div><div className="order-box"><button className="order-btn" onClick={send}>Send Order on WhatsApp · إرسال الطلب</button><div className="note">The order message is copied to your clipboard and your WhatsApp chat opens. Paste/send the message to complete the order.</div></div></div><div className="contact-card"><h3>Connect with Saffa</h3><p>For questions, availability, delivery or anything else, contact us through your preferred platform.</p><div className="contact-links"><a className="contact-link" href={whatsapp} target="_blank"><span>WhatsApp</span><span>Chat →</span></a><a className="contact-link" href="https://www.instagram.com/_saffa_01" target="_blank"><span>Instagram</span><span>@_saffa_01 →</span></a><a className="contact-link" href="https://www.tiktok.com/@saffa_0190" target="_blank"><span>TikTok</span><span>@saffa_0190 →</span></a></div><div style={{marginTop:30}} className="arabic"><h3>معلومات المقاسات</h3><p>متوفر بمقاسين فقط:</p><p><strong>L</strong> — من 50 إلى 75 كجم<br/><strong>XL</strong> — من 75 إلى 110 كجم</p><p>جميع الفساتين بسعر <strong>{PRICE.toLocaleString()} جنيه مصري</strong>.</p></div></div></div></div></main>;
+ const message=`Hello Saffa Fashion 👋\n\nI would like to place an order:\n\nProduct: ${p.name}\nArabic: ${p.arName}\nColor: ${p.color} / ${p.arColor}\nPrice: ${PRICE} EGP\nSize: ${size}\nWeight: ${weight || 'Not provided'} kg\n\nPlease confirm availability and delivery details.`;
+ const send=()=>{navigator.clipboard?.writeText(message); window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');};
+ return <main className="saffa-contact-page">
+   <header className="saffa-contact-header">
+     <a href="/" className="saffa-contact-logo" aria-label="Saffa Fashion home"><img src="/logo.jpeg" alt="Saffa Modesty"/></a>
+     <nav className="saffa-contact-nav" aria-label="Main navigation">
+       <a href="/">Home</a><a href="/#collection">Collection</a><a href="/contact" className="active">Contact Us</a>
+       <a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer">WhatsApp</a>
+     </nav>
+   </header>
+   <div className="saffa-contact-container">
+     <section className="saffa-contact-hero"><div><span className="saffa-contact-eyebrow">SAFFA FASHION · صفا فاشون</span><h1>Contact<br/><em>Us.</em></h1><p>Ready to order? Choose your dress and size below. Your complete order is prepared and sent directly to our WhatsApp.</p></div><div className="saffa-contact-orbit" aria-hidden="true"><span>SAFFA</span><strong>01</strong><small>CONTACT</small></div></section>
+     <section className="saffa-contact-grid">
+       <div className="saffa-contact-card saffa-order-card"><span className="saffa-card-number">01</span><span className="saffa-card-label">PLACE YOUR ORDER</span><h2>Order via<br/>WhatsApp</h2><p>Select your product, size and optional weight. We will include every detail in the WhatsApp order.</p>
+         <label>Product / المنتج</label><select value={product} onChange={e=>setProduct(e.target.value)}>{products.map(x=><option value={x.slug} key={x.slug}>{x.name} — {x.color}</option>)}</select>
+         <label>Size / المقاس</label><div className="saffa-size-row">{(['L','XL'] as const).map(s=><button type="button" key={s} onClick={()=>setSize(s)} className={size===s?'selected':''}><strong>{s}</strong><small>{SIZE_INFO[s]}</small></button>)}</div>
+         <label>Weight / الوزن <small>(optional)</small></label><input value={weight} onChange={e=>setWeight(e.target.value)} inputMode="numeric" placeholder="e.g. 68 kg"/>
+         <div className="saffa-order-preview"><strong>{p.name}</strong><span>{p.arName}</span><span>Color: {p.color}</span><span>Price: {PRICE.toLocaleString()} EGP</span><span>Size: {size} · {SIZE_INFO[size]}</span></div>
+         <button className="saffa-order-button" onClick={send}>Place Order on WhatsApp <span>→</span></button>
+         <p className="saffa-order-note">The order opens WhatsApp with your product, color, size, weight and price already prepared.</p>
+       </div>
+       <aside className="saffa-contact-card saffa-connect-card"><span className="saffa-card-number">02</span><span className="saffa-card-label">CONNECT</span><h2>Follow<br/>Saffa.</h2><p>For questions, availability, delivery or anything else, reach us through your preferred platform.</p><div className="saffa-social-links"><a href={`https://wa.me/${WHATSAPP_NUMBER}`} target="_blank" rel="noreferrer"><span>WhatsApp</span><strong>↗</strong></a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer"><span>Instagram</span><strong>↗</strong></a><a href={TIKTOK_URL} target="_blank" rel="noreferrer"><span>TikTok</span><strong>↗</strong></a></div><div className="saffa-size-info"><span>SIZE GUIDE</span><p><strong>L</strong> — 50–75 kg<br/><strong>XL</strong> — 75–110 kg</p><p>All dresses: <strong>{PRICE.toLocaleString()} EGP</strong></p></div></aside>
+     </section>
+   </div>
+   <footer className="saffa-contact-footer"><a href="/">Saffa Fashion</a><span>© {new Date().getFullYear()} Saffa Fashion</span></footer>
+ </main>;
 }
