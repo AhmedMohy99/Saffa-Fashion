@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import './responsive.css';
 import './product-detail.css';
 import { products, PRICE } from '../lib-products';
@@ -29,6 +29,8 @@ export default function Home() {
   const [selectedSize, setSelectedSize] = useState<Size>('L');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [rotation, setRotation] = useState(0);
+  const [touchStartY, setTouchStartY] = useState<number | null>(null);
+  const wheelLock = useRef(false);
 
   const activeProduct = products[activeIndex];
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -44,24 +46,57 @@ export default function Home() {
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
   }, [quickView, detailOpen]);
-  useEffect(() => {
-    if (!quickView || viewMode !== 'circle') return;
-    const onWheel = (event: WheelEvent) => { event.preventDefault(); setRotation(value => value + event.deltaY * 0.08); if (Math.abs(event.deltaY) > 8) setActiveIndex(value => event.deltaY > 0 ? (value + 1) % products.length : (value - 1 + products.length) % products.length); };
-    window.addEventListener('wheel', onWheel, { passive: false }); return () => window.removeEventListener('wheel', onWheel);
-  }, [quickView, viewMode]);
 
   function openProduct(index: number) { setActiveIndex(index); setSelectedSize('L'); setQuickView(true); setDetailOpen(false); }
+
+  function moveProduct(direction: 1 | -1) {
+    setActiveIndex(value => (value + direction + products.length) % products.length);
+    setQuickView(true);
+    setDetailOpen(false);
+  }
+
+  function handleStageWheel(event: React.WheelEvent<HTMLDivElement>) {
+    if (window.innerWidth > 700 || Math.abs(event.deltaY) < 10 || wheelLock.current) return;
+    event.preventDefault();
+    wheelLock.current = true;
+    moveProduct(event.deltaY > 0 ? 1 : -1);
+    window.setTimeout(() => { wheelLock.current = false; }, 420);
+  }
+
+  function handleTouchEnd(clientY: number) {
+    if (touchStartY === null) return;
+    const distance = touchStartY - clientY;
+    setTouchStartY(null);
+    if (Math.abs(distance) < 45) return;
+    moveProduct(distance > 0 ? 1 : -1);
+  }
+
+  function relativeMobilePosition(index: number) {
+    let diff = index - activeIndex;
+    const half = products.length / 2;
+    if (diff > half) diff -= products.length;
+    if (diff < -half) diff += products.length;
+    return diff;
+  }
+
   function addToCart() {
-    setCart(current => { const existing = current.find(item => item.slug === activeProduct.slug && item.size === selectedSize); if (existing) return current.map(item => item.slug === activeProduct.slug && item.size === selectedSize ? { ...item, quantity: item.quantity + 1 } : item); return [...current, { slug: activeProduct.slug, name: activeProduct.name, image: activeProduct.image, price: PRICE, size: selectedSize, quantity: 1 }]; });
+    setCart(current => {
+      const existing = current.find(item => item.slug === activeProduct.slug && item.size === selectedSize);
+      if (existing) return current.map(item => item.slug === activeProduct.slug && item.size === selectedSize ? { ...item, quantity: item.quantity + 1 } : item);
+      return [...current, { slug: activeProduct.slug, name: activeProduct.name, image: activeProduct.image, price: PRICE, size: selectedSize, quantity: 1 }];
+    });
     setQuickView(false); setDetailOpen(false); setCartOpen(true);
   }
+
   function changeQuantity(slug: string, size: Size, delta: number) { setCart(current => current.map(item => item.slug === slug && item.size === size ? { ...item, quantity: item.quantity + delta } : item).filter(item => item.quantity > 0)); }
+
   function orderOnWhatsApp() {
     if (!cart.length) return;
     const lines = cart.map(item => `• ${item.name}\n  Size: ${item.size}\n  Quantity: ${item.quantity}\n  Price: ${item.price.toFixed(2)} LE`).join('\n\n');
     const message = `Hello Saffa Fashion 👋\n\nI would like to place an order:\n\n${lines}\n\nTotal: ${subtotal.toFixed(2)} LE\n\nPlease confirm my order and delivery details.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   }
+
   function askSaffa() { window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello Saffa Fashion 👋 I need help choosing a dress and the right size.')}`, '_blank', 'noopener,noreferrer'); }
   const ringProducts = useMemo(() => products.map((product, index) => ({ product, index, angle: index * (360 / products.length) - 90 + rotation })), [rotation]);
 
@@ -79,9 +114,16 @@ export default function Home() {
     <section id="collection" className={`blueprint-showcase ${viewMode === 'grid' ? 'is-grid' : 'is-circle'} ${quickView ? 'is-zoomed' : ''}`}>
       <div className="showcase-topline"><span>SAFFA FASHION · صفا فاشون</span><span>{String(products.length).padStart(2, '0')} DRESSES · {PRICE_LABEL} EACH</span></div>
       <div className="showcase-copy"><span className="eyebrow">THE SAFFA COLLECTION</span><h1>Seven expressions.<br/>One Saffa style.</h1><p>Modest silhouettes designed for effortless everyday elegance.</p></div>
-      <div className="showcase-stage" style={{ ['--wheel-rotation' as string]: `${rotation}deg` }}><div className="wheel-orbit" aria-hidden="true"/><div className="wheel-center"><span>SAFFA</span><strong>07</strong><small>DRESSES</small></div>
-        {viewMode === 'circle' ? ringProducts.map(({ product, index, angle }) => <button key={product.slug} className={`showcase-product ${activeIndex === index && quickView ? 'is-active' : ''}`} style={{ ['--angle' as string]: `${angle}deg`, ['--distance' as string]: 'min(31vw, 410px)' }} onClick={() => openProduct(index)} aria-label={`Open ${product.name}`}><span className="showcase-product-image"><img src={product.image} alt={product.name}/></span><span className="showcase-product-index">{String(index + 1).padStart(2,'0')}</span><span className="showcase-label">{product.name} · {PRICE_LABEL}</span></button>) : products.map((product, index) => <button key={product.slug} className={`showcase-product grid-product ${activeIndex === index ? 'is-active' : ''}`} onClick={() => openProduct(index)} aria-label={`Open ${product.name}`}><span className="showcase-product-image"><img src={product.image} alt={product.name}/></span><span className="showcase-product-index">{String(index + 1).padStart(2,'0')}</span><span className="showcase-label">{product.name} · {PRICE_LABEL}</span></button>)}
-      </div><div className="showcase-footer"><span>FAQ</span><span>Terms</span><span>Privacy</span><span>Scroll to rotate · Click a piece to explore</span></div>
+      <div
+        className="showcase-stage"
+        style={{ ['--wheel-rotation' as string]: `${rotation}deg` }}
+        onWheel={handleStageWheel}
+        onTouchStart={event => setTouchStartY(event.touches[0].clientY)}
+        onTouchEnd={event => handleTouchEnd(event.changedTouches[0].clientY)}
+      >
+        <div className="wheel-orbit" aria-hidden="true"/><div className="wheel-center"><span>SAFFA</span><strong>07</strong><small>DRESSES</small></div>
+        {viewMode === 'circle' ? ringProducts.map(({ product, index, angle }) => <button key={product.slug} className={`showcase-product ${activeIndex === index && quickView ? 'is-active' : ''}`} style={{ ['--angle' as string]: `${angle}deg`, ['--distance' as string]: 'min(31vw, 410px)', ['--mobile-offset' as string]: relativeMobilePosition(index) }} onClick={() => openProduct(index)} aria-label={`Open ${product.name}`}><span className="showcase-product-image"><img src={product.image} alt={product.name}/></span><span className="showcase-product-index">{String(index + 1).padStart(2,'0')}</span><span className="showcase-label">{product.name} · {PRICE_LABEL}</span></button>) : products.map((product, index) => <button key={product.slug} className={`showcase-product grid-product ${activeIndex === index ? 'is-active' : ''}`} onClick={() => openProduct(index)} aria-label={`Open ${product.name}`}><span className="showcase-product-image"><img src={product.image} alt={product.name}/></span><span className="showcase-product-index">{String(index + 1).padStart(2,'0')}</span><span className="showcase-label">{product.name} · {PRICE_LABEL}</span></button>)}
+      </div><div className="showcase-footer"><span>FAQ</span><span>Terms</span><span>Privacy</span><span>Swipe / scroll to swap · Tap a piece to zoom</span></div>
     </section>
 
     {quickView && <div className="quick-view-card" onClick={() => setDetailOpen(true)} role="button" tabIndex={0}><div><span className="quick-label">QUICK VIEW</span><h2>{activeProduct.name}</h2><strong>{PRICE_LABEL}</strong></div><span className="quick-thumb"><img src={activeProduct.image} alt=""/><em>Open</em></span><button className="quick-close" onClick={event => { event.stopPropagation(); setQuickView(false); }}>×</button></div>}
