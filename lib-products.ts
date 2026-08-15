@@ -1,5 +1,7 @@
 export type Product = {
   slug: string; name: string; arName: string; color: string; arColor: string; image: string; description: string; arDescription: string;
+  gallery?: string[];
+  video?: string;
 };
 export const products: Product[] = [
  {slug:'mocha-grace',name:'Safa Mocha Grace Dress',arName:'فستان صفا موكا جريس',color:'Mocha Brown',arColor:'بني موكا',image:'/products/safa-mocha.png',description:'An elegant full-length modest dress in mocha brown, featuring a soft crinkled wavy texture, a gathered waist and a graceful flowing silhouette. Designed for comfortable coverage and an effortlessly elegant hijab-friendly look.',arDescription:'فستان محتشم أنيق بطول كامل باللون البني الموكا، يتميز بقماش مكرمش مموج ناعم وخصر مجمع وقصة انسيابية. يمنحك تغطية مريحة وإطلالة أنثوية راقية ومتناسقة مع الحجاب.'},
