@@ -1,6 +1,7 @@
 import './globals.css';
 import './device.css';
 import './white-theme.css';
+import './site-header.css';
 
 export const metadata = {
   title: 'Saffa Fashion | صفا فاشون',
@@ -11,9 +12,5 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+  return <html lang="en"><body>{children}</body></html>;
 }
