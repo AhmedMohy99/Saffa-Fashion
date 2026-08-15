@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from 'react';
 import '../product-detail.css';
+import '../white-theme.css';
 
 const WHATSAPP_NUMBER = '201069473693';
 const INSTAGRAM_URL = 'https://www.instagram.com/_saffa_01/';
@@ -23,9 +24,8 @@ export default function ContactPage() {
   }
   return <main className="saffa-contact-modern">
     <header className="store-header blueprint-header contact-modern-header">
-      <a className="brand-wordmark" href="/">Saffa Fashion</a>
-      <a className="ask-ai centered-ai" href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello Saffa Fashion 👋 I need help.')}`} target="_blank" rel="noreferrer"><span>◉</span> Ask Saffa</a>
-      <nav className="blueprint-nav" aria-label="Main navigation"><a href="/">Store</a><span className="contact-region">ROW</span><a href="/#collection">Collection</a><a href="/contact" className="active">Contact</a><a href="/" className="nav-view">Circle</a><a href="/" className="cart-link">Cart</a></nav>
+      <a className="brand-wordmark" href="/">SAFFA <span>FASHION</span></a>
+      <nav className="blueprint-nav" aria-label="Main navigation"><a href="/">Home</a><a href="/grid">Collection</a><a href="/about">About</a><a href="/contact" className="active">Contact</a><a className="cart-link" href="/">Cart</a></nav>
     </header>
     <section className="contact-modern-main">
       <div className="contact-modern-heading"><span className="quick-label">SAFFA FASHION · CONTACT</span><h1>Contact</h1><p>For inquiries regarding orders, sizing, or general questions, please fill out the form below. Our team will respond as soon as possible.</p></div>
@@ -38,6 +38,6 @@ export default function ContactPage() {
         {submitted && <p className="contact-success">Your message is ready in WhatsApp. Thank you for contacting Saffa Fashion.</p>}
       </form>
     </section>
-    <footer className="blueprint-footer contact-modern-footer"><span>© Saffa Fashion</span><nav><a href="#">FAQ</a><a href="#">Terms</a><a href="#">Privacy</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a></nav></footer>
+    <footer className="blueprint-footer contact-modern-footer"><span>© Saffa Fashion</span><nav><a href="/about">About</a><a href="#">Terms</a><a href="#">Privacy</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a></nav></footer>
   </main>;
 }
