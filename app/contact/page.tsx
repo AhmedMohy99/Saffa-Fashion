@@ -1,102 +1,18 @@
 'use client';
-
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 import '../product-detail.css';
 import '../white-theme.css';
 import SaffaHeader, { useSaffaLanguage } from '../components/SaffaHeader';
-import { products, PRICE } from '../../lib-products';
+import { products } from '../../lib-products';
 
-const WHATSAPP_NUMBER = '201069473693';
-const INSTAGRAM_URL = 'https://www.instagram.com/_saffa_01/';
-const TIKTOK_URL = 'https://www.tiktok.com/@saffa_0190';
-
-export default function ContactPage() {
-  const [language] = useSaffaLanguage();
-  const [productSlug, setProductSlug] = useState(products[0]?.slug ?? '');
-  const [size, setSize] = useState('L');
-  const [weight, setWeight] = useState('');
-  const [submitted, setSubmitted] = useState(false);
-  const ar = language === 'ar';
-  const product = products.find(item => item.slug === productSlug) ?? products[0];
-
-  useEffect(() => {
-    document.documentElement.lang = language;
-    document.documentElement.dir = ar ? 'rtl' : 'ltr';
-  }, [language, ar]);
-
-  const t = ar ? {
-    label: 'ضعي طلبك', title: 'اطلبي عبر واتساب', intro: 'اختاري المنتج والمقاس والوزن الاختياري. سنضع كل التفاصيل في رسالة واتساب جاهزة.', product: 'المنتج', size: 'المقاس', weight: 'الوزن', optional: 'اختياري', lRange: '50–75 كجم', xlRange: '75–110 كجم', summary: 'ملخص الطلب', color: 'اللون', price: 'السعر', orderSize: 'المقاس', place: 'إرسال الطلب عبر واتساب', ready: 'سيتم فتح واتساب مع تفاصيل المنتج والمقاس والوزن والسعر جاهزة.', about: 'من نحن', contact: 'تواصل معنا', privacy: 'الخصوصية', terms: 'الشروط'
-  } : {
-    label: 'PLACE YOUR ORDER', title: 'Order via WhatsApp', intro: 'Select your product, size and optional weight. We will include every detail in the WhatsApp order.', product: 'PRODUCT', size: 'SIZE', weight: 'WEIGHT', optional: 'optional', lRange: '50–75 kg', xlRange: '75–110 kg', summary: 'ORDER SUMMARY', color: 'Color', price: 'Price', orderSize: 'Size', place: 'Place Order on WhatsApp', ready: 'The order opens WhatsApp with your product, color, size, weight and price already prepared.', about: 'About', contact: 'Contact', privacy: 'Privacy', terms: 'Terms'
-  };
-
-  const ranges = useMemo(() => ({ L: t.lRange, XL: t.xlRange }), [t.lRange, t.xlRange]);
-
-  function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!product) return;
-    const range = ranges[size as keyof typeof ranges] ?? '';
-    const message = ar
-      ? `مرحباً صفا فاشن 👋\n\nأرغب في طلب:\n${product.name}\nاللون: ${product.color}\nالمقاس: ${size} (${range})\nالوزن: ${weight || 'غير محدد'}\nالسعر: ${PRICE.toFixed(2)} جنيه مصري`
-      : `Hello Saffa Fashion 👋\n\nI would like to place an order:\n${product.name}\nColor: ${product.color}\nSize: ${size} (${range})\nWeight: ${weight || 'Not provided'}\nPrice: EGP ${PRICE.toFixed(2)}`;
-    setSubmitted(true);
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
-  }
-
-  if (!product) return null;
-
-  return (
-    <main className="saffa-order-page">
-      <SaffaHeader active="contact" />
-
-      <section className="saffa-order-main">
-        <div className="saffa-order-heading">
-          <span>{t.label}</span>
-          <h1>{t.title}</h1>
-          <p>{t.intro}</p>
-          <b>01</b>
-        </div>
-
-        <form className="saffa-order-card" onSubmit={submit}>
-          <div className="saffa-order-card-top"><span>{t.label}</span><span>01</span></div>
-          <h2>{t.title}</h2>
-          <p className="saffa-order-card-intro">{t.intro}</p>
-
-          <label className="saffa-order-field">
-            <span>{t.product} / {ar ? 'المنتج' : 'Product'}</span>
-            <select value={productSlug} onChange={event => setProductSlug(event.target.value)}>
-              {products.map(item => <option key={item.slug} value={item.slug}>{item.name} — {item.color}</option>)}
-            </select>
-          </label>
-
-          <fieldset className="saffa-order-field saffa-size-field">
-            <legend>{t.size} / {ar ? 'المقاس' : 'Size'}</legend>
-            <div className="saffa-size-options">
-              <button type="button" className={size === 'L' ? 'selected' : ''} onClick={() => setSize('L')}><strong>L</strong><span>{t.lRange}</span></button>
-              <button type="button" className={size === 'XL' ? 'selected' : ''} onClick={() => setSize('XL')}><strong>XL</strong><span>{t.xlRange}</span></button>
-            </div>
-          </fieldset>
-
-          <label className="saffa-order-field">
-            <span>{t.weight} / {ar ? 'الوزن' : 'Weight'} <small>({t.optional})</small></span>
-            <input value={weight} onChange={event => setWeight(event.target.value)} inputMode="decimal" placeholder={ar ? 'مثال: 68 كجم' : 'e.g. 68 kg'} />
-          </label>
-
-          <div className="saffa-order-summary">
-            <strong>{product.name}</strong>
-            <p>{ar ? product.arDescription : product.description}</p>
-            <span>{t.color}: {product.color}</span>
-            <span>{t.price}: {PRICE.toFixed(2)} EGP</span>
-            <span>{t.orderSize}: {size} · {ranges[size as keyof typeof ranges]}</span>
-          </div>
-
-          <button className="saffa-order-submit" type="submit"><span>{t.place}</span><b>→</b></button>
-          <p className="saffa-order-ready">{t.ready}</p>
-          {submitted && <p className="saffa-order-success">{ar ? 'تم تجهيز طلبك لواتساب.' : 'Your WhatsApp order is ready.'}</p>}
-        </form>
-      </section>
-
-      <footer className="saffa-order-footer"><span>© Saffa Fashion</span><nav><a href="/about">{t.about}</a><a href="/contact">{t.contact}</a><a href="#">{t.privacy}</a><a href="#">{t.terms}</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a></nav></footer>
-    </main>
-  );
+const WHATSAPP_NUMBER='201069473693';
+export default function ContactPage(){
+ const [language]=useSaffaLanguage(); const [productSlug,setProductSlug]=useState(products[0]?.slug??''); const [size,setSize]=useState(products[0]?.sizeOptions[0]??'L'); const [weight,setWeight]=useState(''); const [name,setName]=useState(''); const [phone,setPhone]=useState(''); const [address,setAddress]=useState(''); const [inspection,setInspection]=useState(true); const [submitted,setSubmitted]=useState(false); const ar=language==='ar';
+ const product=products.find(item=>item.slug===productSlug)??products[0];
+ useEffect(()=>{document.documentElement.lang=language;document.documentElement.dir=ar?'rtl':'ltr';},[language,ar]);
+ useEffect(()=>{if(product&&!product.sizeOptions.includes(size as any))setSize(product.sizeOptions[0]);},[product,size]);
+ const range=useMemo(()=>product?.sizeInfo[size]||'',[product,size]);
+ function submit(e:FormEvent){e.preventDefault();if(!product)return;const message=ar?`مرحباً صفا فاشن 👋\n\nأرغب في تأكيد طلب:\n\nالمنتج: ${product.arName}\nاللون المحدد: ${product.arColor}\nالمقاس: ${size} (${range})\nالوزن: ${weight||'غير محدد'}\nالسعر: ${product.price} جنيه مصري${product.originalPrice?`\nالسعر قبل الخصم: ${product.originalPrice} جنيه مصري\nالعرض: ${product.saleLabel}`:''}\n\nالاسم: ${name||'غير محدد'}\nرقم الهاتف: ${phone||'غير محدد'}\nالعنوان: ${address||'غير محدد'}\nالمعاينة قبل الاستلام: ${inspection?'نعم':'لا'}\n\nيرجى تأكيد التوفر والتوصيل والديبوزيت.`:`Hello Saffa Fashion 👋\n\nI would like to confirm an order:\n\nProduct: ${product.name}\nSELECTED COLOR: ${product.color}\nSize: ${size} (${range})\nWeight: ${weight||'Not provided'} kg\nPrice: EGP ${product.price.toFixed(2)}${product.originalPrice?`\nOriginal price: EGP ${product.originalPrice.toFixed(2)}\nOffer: ${product.saleLabel}`:''}\n\nName: ${name||'[customer]'}\nPhone: ${phone||'[phone]'}\nAddress: ${address||'[address]'}\nInspection before receipt: ${inspection?'YES':'NO'}\n\nPlease confirm availability, delivery and deposit.`;setSubmitted(true);window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`,'_blank','noopener,noreferrer');}
+ if(!product)return null;
+ return <main className="saffa-order-page"><SaffaHeader active="contact"/><section className="saffa-order-main"><div className="saffa-order-heading"><span>{ar?'ضعي طلبك':'PLACE YOUR ORDER'}</span><h1>{ar?'اطلبي الآن عبر واتساب':'Order via WhatsApp'}</h1><p>{ar?'اختاري المنتج واللون والمقاس وأدخلي بياناتك. سنرسل التفاصيل كاملة إلى واتساب بدون أي لخبطة في اللون أو السعر.':'Choose the product, exact color and size. Your complete customer data, selected color and current sale price are sent to WhatsApp.'}</p></div><form className="saffa-order-card" onSubmit={submit}><div className="saffa-order-card-top"><span>{ar?'بيانات الطلب':'ORDER DETAILS'}</span><span>01</span></div><label className="saffa-order-field"><span>{ar?'المنتج':'PRODUCT'}</span><select value={productSlug} onChange={e=>setProductSlug(e.target.value)}>{products.map(item=><option key={item.slug} value={item.slug}>{item.name} — {item.color} — EGP {item.price}</option>)}</select></label><fieldset className="saffa-order-field saffa-size-field"><legend>{ar?'المقاس':'SIZE'}</legend><div className="saffa-size-options">{product.sizeOptions.map(s=><button type="button" key={s} className={size===s?'selected':''} onClick={()=>setSize(s)}><strong>{s}</strong><span>{product.sizeInfo[s]}</span></button>)}</div></fieldset><label className="saffa-order-field"><span>{ar?'الوزن':'WEIGHT'} <small>({ar?'اختياري':'optional'})</small></span><input value={weight} onChange={e=>setWeight(e.target.value)} inputMode="decimal" placeholder={ar?'مثال: 68 كجم':'e.g. 68 kg'}/></label><label className="saffa-order-field"><span>{ar?'الاسم':'FULL NAME'}</span><input required value={name} onChange={e=>setName(e.target.value)} /></label><label className="saffa-order-field"><span>{ar?'رقم الهاتف':'PHONE NUMBER'}</span><input required value={phone} onChange={e=>setPhone(e.target.value)} inputMode="tel" placeholder="01xxxxxxxxx" /></label><label className="saffa-order-field"><span>{ar?'العنوان':'ADDRESS'}</span><input required value={address} onChange={e=>setAddress(e.target.value)} /></label><label style={{display:'flex',gap:12,alignItems:'center',marginBottom:26,fontSize:13}}><input type="checkbox" checked={inspection} onChange={e=>setInspection(e.target.checked)} style={{width:18,height:18}}/><span>{ar?'متاح المعاينة قبل الاستلام':'Inspection before receipt is available'}</span></label><div className="saffa-order-summary"><strong>{product.name}</strong><span>{ar?'اللون المحدد':'Selected color'}: {product.color}</span><span>{ar?'السعر':'Price'}: EGP {product.price.toFixed(2)}</span>{product.originalPrice&&<span><s>EGP {product.originalPrice.toFixed(2)}</s> · {product.saleLabel}</span>}<span>{ar?'المقاس':'Size'}: {size} · {range}</span></div><button className="saffa-order-submit" type="submit"><span>{submitted?(ar?'تم تجهيز واتساب':'WhatsApp Ready'):(ar?'إرسال الطلب إلى واتساب':'Place Order on WhatsApp')}</span><b>→</b></button><p className="saffa-order-ready">{ar?'لا يتم تحصيل المبلغ كاملًا هنا. يتم تأكيد الديبوزيت والتفاصيل عبر واتساب.':'No full payment is collected here. Deposit and final confirmation are handled through WhatsApp.'}</p></form></section></main>;
 }
