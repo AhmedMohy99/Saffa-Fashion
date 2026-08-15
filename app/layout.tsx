@@ -1,5 +1,6 @@
 import './globals.css';
 import './device.css';
+import './white-theme.css';
 
 export const metadata = {
   title: 'Saffa Fashion | صفا فاشون',
