@@ -1,0 +1,32 @@
+/* Saffa Fashion — white canvas + refined clock circle */
+:root{--blueprint-bg:#fff;--line:rgba(17,17,17,.10)}
+html,body,.saffa-store,.blueprint-showcase{background:#fff!important}
+.store-header.blueprint-header{background:rgba(255,255,255,.96)!important}
+.showcase-copy h1{font-size:clamp(42px,5.4vw,78px);line-height:.9;max-width:700px}
+.showcase-copy p{color:#666;max-width:420px}
+.wheel-orbit{width:min(54vw,680px)!important;height:min(54vw,680px)!important;min-width:0!important;min-height:0!important;border-color:rgba(17,17,17,.10)!important}
+.wheel-center{width:112px!important;height:112px!important;background:#fff!important;border:1px solid rgba(17,17,17,.10);box-shadow:0 12px 40px rgba(0,0,0,.06)!important}
+.showcase-product-image{background:#fff!important;box-shadow:0 12px 32px rgba(0,0,0,.07)!important}
+.is-zoomed .wheel-orbit{transform:translate(-50%,-50%) scale(1.05)!important}
+.is-zoomed .wheel-center{transform:translate(-50%,-50%) scale(1)!important}
+.is-zoomed .showcase-product:not(.is-active){opacity:.48}
+.is-zoomed .showcase-product.is-active{transform:translate(-50%,-50%) scale(1.12)!important;z-index:30}
+.is-zoomed .showcase-product.is-active .showcase-product-image{transform:scale(1.12)!important;box-shadow:0 25px 60px rgba(0,0,0,.16)!important}
+@media(max-width:700px){
+.blueprint-showcase{min-height:calc(100vh - 62px)!important;padding-left:12px!important;padding-right:12px!important}
+.showcase-copy{position:relative!important;left:auto!important;top:auto!important;margin:28px 8px 0!important;z-index:4}
+.showcase-copy h1{font-size:36px!important;line-height:.92!important;letter-spacing:-.055em!important;margin:10px 0 12px!important}
+.showcase-copy p{font-size:11px!important;line-height:1.5!important;margin:0!important;max-width:290px!important}
+.showcase-stage{height:470px!important;min-height:470px!important;margin-top:4px!important;overflow:visible!important;touch-action:pan-y!important}
+.showcase-stage .wheel-orbit{display:block!important;width:300px!important;height:300px!important;min-width:0!important;min-height:0!important;left:50%!important;top:50%!important}
+.showcase-stage .wheel-center{display:flex!important;width:78px!important;height:78px!important;left:50%!important;top:50%!important}
+.wheel-center strong{font-size:25px!important}.wheel-center span{font-size:7px!important}.wheel-center small{font-size:6px!important}
+.showcase-product{display:block!important;width:72px!important;height:100px!important;left:50%!important;top:50%!important;opacity:1!important;pointer-events:auto!important;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(150px) rotate(calc(var(--angle) * -1))!important;z-index:4!important}
+.showcase-product-image{width:72px!important;height:92px!important;border-radius:10px!important;box-shadow:0 8px 22px rgba(0,0,0,.08)!important}.showcase-product-image img{object-fit:contain!important}
+.showcase-product-index{display:block!important;margin-top:4px!important;font-size:6px!important;color:#888!important}
+.showcase-product.is-active{transform:translate(-50%,-50%) rotate(var(--angle)) translateX(150px) rotate(calc(var(--angle) * -1)) scale(1.08)!important;z-index:20!important}
+.is-zoomed .showcase-product.is-active{transform:translate(-50%,-50%) scale(1.22)!important;z-index:30!important}
+.is-zoomed .showcase-product.is-active .showcase-product-image{transform:scale(1.08)!important}.is-zoomed .showcase-product:not(.is-active){opacity:.38!important}.is-zoomed .wheel-orbit{transform:translate(-50%,-50%) scale(1)!important}
+.showcase-footer{display:none!important}
+}
+@media(max-width:390px){.showcase-stage{height:430px!important;min-height:430px!important}.showcase-stage .wheel-orbit{width:270px!important;height:270px!important}.showcase-product{width:64px!important;height:90px!important;transform:translate(-50%,-50%) rotate(var(--angle)) translateX(135px) rotate(calc(var(--angle) * -1))!important}.showcase-product-image{width:64px!important;height:82px!important}.is-zoomed .showcase-product.is-active{transform:translate(-50%,-50%) scale(1.16)!important}}
