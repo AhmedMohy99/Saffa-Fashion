@@ -18,4 +18,4 @@ export const products: Product[] = [
  {slug:'botanical-taupe',name:'Safa Botanical Dress',arName:'فستان صفا بوتانيكال',color:'Taupe',arColor:'تاوب',image:'/products/safa-botanical-taupe.png',description:'A refined taupe modest maxi shirt dress with a delicate white botanical print, button-front styling and an elegant flowing silhouette.',arDescription:'فستان ماكسي محتشم باللون التاوب الراقي مع نقوش نباتية بيضاء رقيقة، وأزرار أمامية وقصة انسيابية أنيقة.'}
 ];
 export const SIZE_INFO = { L:'50–75 kg', XL:'75–110 kg' } as const;
-export const PRICE = 650;
+export const PRICE = 700;
