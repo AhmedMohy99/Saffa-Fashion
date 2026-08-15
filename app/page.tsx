@@ -19,6 +19,7 @@ export default function Home() {
   const wheelLock = useRef(false);
   const activeProduct = products[activeIndex];
   const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   useEffect(() => {
     try {
@@ -81,11 +82,18 @@ export default function Home() {
     setCart(current => current.map(item => item.slug === slug ? { ...item, quantity: item.quantity + delta } : item).filter(item => item.quantity > 0));
   }
 
+  function removeFromCart(slug: string) {
+    setCart(current => current.filter(item => item.slug !== slug));
+  }
+
+  function clearCart() {
+    setCart([]);
+  }
+
   function orderOnWhatsApp() {
     if (!cart.length) return;
     const lines = cart.map(item => `• ${item.name}\n  Quantity: ${item.quantity}\n  Price: EGP ${item.price.toFixed(2)}`).join('\n\n');
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    const message = `Hello Saffa Fashion 👋\n\nI would like to place an order:\n\n${lines}\n\nTotal: EGP ${total.toFixed(2)}`;
+    const message = `Hello Saffa Fashion 👋\n\nI would like to place an order:\n\n${lines}\n\nTotal: EGP ${cartTotal.toFixed(2)}`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   }
 
@@ -99,7 +107,9 @@ export default function Home() {
           <a href="/about">About</a>
           <a href="/contact">Contact</a>
         </nav>
-        <button className="saffa-cart-button" onClick={() => setCartOpen(true)}>Cart <span>{cartCount}</span></button>
+        <button className="saffa-cart-button" type="button" aria-label={`Open cart, ${cartCount} items`} onClick={() => setCartOpen(true)}>
+          <span className="saffa-cart-label">Cart</span><span>{cartCount}</span>
+        </button>
       </header>
 
       <section className="saffa-product-stage" onWheel={handleWheel} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd} aria-label="Saffa Fashion product showcase">
@@ -113,11 +123,7 @@ export default function Home() {
           ))}
         </div>
 
-        <div className="saffa-product-index">
-          <span className="index-active">{String(activeIndex + 1).padStart(2, '0')}</span>
-          <span>/</span>
-          <span>{String(products.length).padStart(2, '0')}</span>
-        </div>
+        <div className="saffa-product-index"><span className="index-active">{String(activeIndex + 1).padStart(2, '0')}</span><span>/</span><span>{String(products.length).padStart(2, '0')}</span></div>
 
         <div className="saffa-product-meta">
           <span>{activeProduct.color}</span>
@@ -133,26 +139,51 @@ export default function Home() {
       {detailOpen && (
         <div className="swipe-detail-backdrop" onClick={() => setDetailOpen(false)}>
           <aside className="swipe-detail" onClick={event => event.stopPropagation()}>
-            <div className="swipe-detail-head"><span className="swipe-eyebrow">SAFFA FASHION</span><button onClick={() => setDetailOpen(false)}>Close ×</button></div>
+            <div className="swipe-detail-head"><span className="swipe-eyebrow">SAFFA FASHION</span><button type="button" onClick={() => setDetailOpen(false)}>Close ×</button></div>
             <div className="swipe-detail-image"><img src={activeProduct.image} alt={activeProduct.name} /></div>
             <span className="swipe-eyebrow">{activeProduct.color}</span>
             <h2>{activeProduct.name}</h2>
             <strong className="swipe-detail-price">EGP {PRICE.toFixed(2)}</strong>
             <p>{activeProduct.description}</p>
             <p>{activeProduct.arDescription}</p>
-            <div className="swipe-detail-actions"><button onClick={() => addToCart()}>Add to Cart</button><button className="secondary" onClick={() => setDetailOpen(false)}>Keep Browsing</button></div>
+            <div className="swipe-detail-actions"><button type="button" onClick={() => addToCart()}>Add to Cart</button><button type="button" className="secondary" onClick={() => setDetailOpen(false)}>Keep Browsing</button></div>
           </aside>
         </div>
       )}
 
       {cartOpen && (
-        <div className="swipe-detail-backdrop" onClick={() => setCartOpen(false)}>
-          <aside className="swipe-detail" onClick={event => event.stopPropagation()}>
-            <div className="swipe-detail-head"><span className="swipe-eyebrow">YOUR SELECTION</span><button onClick={() => setCartOpen(false)}>Close ×</button></div>
-            {!cart.length ? <><h2>Your cart is empty.</h2><p>Open a product to add it to your selection.</p></> : <>
-              {cart.map(item => <div key={item.slug} className="saffa-cart-row"><img src={item.image} alt="" /><div><strong>{item.name}</strong><p>EGP {item.price.toFixed(2)}</p><div><button onClick={() => changeQuantity(item.slug, -1)}>−</button><span>{item.quantity}</span><button onClick={() => changeQuantity(item.slug, 1)}>+</button></div></div></div>)}
-              <div className="swipe-detail-actions"><button onClick={orderOnWhatsApp}>Checkout via WhatsApp</button></div>
-            </>}
+        <div className="saffa-cart-overlay" role="dialog" aria-modal="true" aria-label="Shopping cart" onClick={() => setCartOpen(false)}>
+          <aside className="saffa-cart-drawer" onClick={event => event.stopPropagation()}>
+            <div className="saffa-cart-head">
+              <div><span className="swipe-eyebrow">YOUR SELECTION</span><h2>Your Cart</h2><p>{cartCount} {cartCount === 1 ? 'item' : 'items'}</p></div>
+              <button type="button" className="saffa-cart-close" onClick={() => setCartOpen(false)} aria-label="Close cart">×</button>
+            </div>
+
+            {!cart.length ? (
+              <div className="saffa-cart-empty"><div className="saffa-cart-empty-circle">0</div><h3>Your cart is empty.</h3><p>Open a dress and tap “Add to Cart” to add it here.</p><button type="button" onClick={() => setCartOpen(false)}>Continue Shopping</button></div>
+            ) : (
+              <>
+                <div className="saffa-cart-items">
+                  {cart.map(item => (
+                    <div key={item.slug} className="saffa-cart-item">
+                      <div className="saffa-cart-image"><img src={item.image} alt="" /></div>
+                      <div className="saffa-cart-item-main">
+                        <strong>{item.name}</strong>
+                        <span>EGP {item.price.toFixed(2)}</span>
+                        <div className="saffa-quantity" aria-label={`Quantity for ${item.name}`}>
+                          <button type="button" onClick={() => changeQuantity(item.slug, -1)} aria-label="Decrease quantity">−</button>
+                          <b>{item.quantity}</b>
+                          <button type="button" onClick={() => changeQuantity(item.slug, 1)} aria-label="Increase quantity">+</button>
+                        </div>
+                      </div>
+                      <button type="button" className="saffa-remove" onClick={() => removeFromCart(item.slug)} aria-label={`Remove ${item.name}`}>Remove</button>
+                    </div>
+                  ))}
+                </div>
+                <div className="saffa-cart-total"><span>Total</span><strong>EGP {cartTotal.toFixed(2)}</strong></div>
+                <div className="saffa-cart-actions"><button type="button" className="saffa-clear-cart" onClick={clearCart}>Clear Cart</button><button type="button" className="saffa-checkout" onClick={orderOnWhatsApp}>Checkout via WhatsApp <span>↗</span></button></div>
+              </>
+            )}
           </aside>
         </div>
       )}
