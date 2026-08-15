@@ -1,0 +1,22 @@
+:root{--cream:#fff!important;--paper:#fff!important;--black:#111;--muted:#777;--line:rgba(17,17,17,.10)}
+html,body{background:#fff!important;color:#111}
+body{background:#fff!important}
+.saffa-store,.saffa-swipe-viewer,.saffa-contact-page{background:#fff!important}
+.store-header,.saffa-contact-header{background:#fff!important;border-bottom-color:rgba(17,17,17,.10)!important}
+.swipe-stage{background:#fff!important}
+.swipe-stage::before{border-color:rgba(17,17,17,.08)!important}
+.swipe-product-image{background:#fff!important;border-color:rgba(17,17,17,.07)!important;box-shadow:0 18px 55px rgba(17,17,17,.035)!important}
+.swipe-product-image:hover{box-shadow:0 24px 70px rgba(17,17,17,.07)!important}
+.swipe-dial{background:rgba(255,255,255,.96)!important}
+.swipe-dial::after{background:#fff!important}
+.swipe-info{background:#111!important}
+.swipe-open{background:#fff!important}
+.swipe-detail{background:#fff!important}
+.swipe-detail-image{background:#fff!important}
+.grid-product-image{background:#fff!important}
+.circle-center{background:#fff!important;border:1px solid rgba(17,17,17,.10)!important}
+.circle-product-image{background:#fff!important;border-color:#fff!important}
+.saffa-contact-page{background:#fff!important}
+.product-sheet,.cart-drawer{background:#111!important}
+.blueprint-footer,.store-footer,.social-footer{background:#fff!important}
+@media(max-width:700px){.swipe-stage{background:#fff!important}.swipe-product-image{box-shadow:0 16px 45px rgba(17,17,17,.035)!important}}
