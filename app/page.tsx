@@ -42,18 +42,27 @@ export default function Home() {
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') { setQuickView(false); setDetailOpen(false); setCartOpen(false); }
-      if ((quickView || detailOpen) && (event.key === 'ArrowRight' || event.key === 'ArrowDown')) setActiveIndex(value => (value + 1) % products.length);
-      if ((quickView || detailOpen) && (event.key === 'ArrowLeft' || event.key === 'ArrowUp')) setActiveIndex(value => (value - 1 + products.length) % products.length);
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown') moveProduct(1);
+      if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') moveProduct(-1);
     };
     window.addEventListener('keydown', onKey); return () => window.removeEventListener('keydown', onKey);
-  }, [quickView, detailOpen]);
+  });
 
-  function openProduct(index: number) { setActiveIndex(index); setSelectedSize('L'); setQuickView(true); setDetailOpen(false); }
-  function moveProduct(direction: 1 | -1) { setActiveIndex(value => (value + direction + products.length) % products.length); setQuickView(true); setDetailOpen(false); }
+  function openProduct(index: number) {
+    setActiveIndex(index); setRotation(-index * (360 / products.length)); setSelectedSize('L'); setQuickView(true); setDetailOpen(false);
+  }
+  function moveProduct(direction: 1 | -1) {
+    setActiveIndex(value => {
+      const next = (value + direction + products.length) % products.length;
+      setRotation(-next * (360 / products.length));
+      return next;
+    });
+    setQuickView(true); setDetailOpen(false);
+  }
   function handleStageWheel(event: React.WheelEvent<HTMLDivElement>) {
-    if (window.innerWidth > 700 || Math.abs(event.deltaY) < 10 || wheelLock.current) return;
+    if (Math.abs(event.deltaY) < 10 || wheelLock.current) return;
     event.preventDefault(); wheelLock.current = true; moveProduct(event.deltaY > 0 ? 1 : -1);
-    window.setTimeout(() => { wheelLock.current = false; }, 420);
+    window.setTimeout(() => { wheelLock.current = false; }, 520);
   }
   function handleTouchEnd(clientY: number) {
     if (touchStartY === null) return;
@@ -74,7 +83,11 @@ export default function Home() {
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
   }
   function askSaffa() { window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hello Saffa Fashion 👋 I need help choosing a dress and the right size.')}`, '_blank', 'noopener,noreferrer'); }
-  const ringProducts = useMemo(() => products.map((product, index) => ({ product, index, angle: index * (360 / products.length) - 90 + rotation })), [rotation]);
+  const step = 360 / products.length;
+  const ringProducts = useMemo(() => products.map((product, index) => {
+    const relative = ((index - activeIndex + products.length + Math.floor(products.length / 2)) % products.length) - Math.floor(products.length / 2);
+    return { product, index, angle: relative * step - 90 + rotation + activeIndex * step };
+  }), [activeIndex, rotation, step]);
 
   return <main className="saffa-store" id="top">
     <header className="store-header blueprint-header">
@@ -102,7 +115,7 @@ export default function Home() {
       <span className="eyebrow">{activeProduct.color}</span><h2>{activeProduct.name}</h2><strong className="detail-price">{PRICE_LABEL}</strong><p>{activeProduct.description}</p><p className="arabic-copy">{activeProduct.arDescription}</p><p className="shipping-note">Delivery and shipping details are confirmed with your Saffa order.</p>
       <div className="detail-swatches">{products.slice(Math.max(0, activeIndex - 1), activeIndex + 2).map((item, index) => <button key={item.slug} onClick={() => setActiveIndex(Math.max(0, activeIndex - 1) + index)}><img src={item.image} alt={item.name}/></button>)}</div>
       <section className="sizing-section"><div className="sizing-heading"><div><span className="quick-label">SIZE GUIDE</span><h3>Select your size</h3></div><span>All measurements in cm</span></div><div className="size-selector">{SIZES.map(size => <button key={size} className={selectedSize === size ? 'selected' : ''} onClick={() => setSelectedSize(size)}>{size}</button>)}</div><div className="sizing-table-wrap"><table className="sizing-table"><thead><tr><th>Measurement</th>{SIZES.map(size => <th key={size}>{size}</th>)}</tr></thead><tbody><tr><td>Chest Width</td>{SIZES.map(size => <td key={size}>{SIZE_GUIDE[size].chest}</td>)}</tr><tr><td>Body Length</td>{SIZES.map(size => <td key={size}>{SIZE_GUIDE[size].body}</td>)}</tr><tr><td>Sleeve Length</td>{SIZES.map(size => <td key={size}>{SIZE_GUIDE[size].sleeve}</td>)}</tr></tbody></table></div><p className="size-footnote">* All measurements are in centimeters. For the best fit, compare these garment measurements with a similar dress you already own.</p></section>
-      <button className="detail-cart" onClick={addToCart}>Add to Cart <span>{PRICE_LABEL}</span></button><p className="detail-helper">Swipe, scroll, or use ← → to browse.</p><div className="detail-arrows"><button onClick={() => setActiveIndex(value => (value - 1 + products.length) % products.length)}>← Previous</button><button onClick={() => setActiveIndex(value => (value + 1) % products.length)}>Next →</button></div>
+      <button className="detail-cart" onClick={addToCart}>Add to Cart <span>{PRICE_LABEL}</span></button><p className="detail-helper">Swipe, scroll, or use ← → to browse.</p><div className="detail-arrows"><button onClick={() => moveProduct(-1)}>← Previous</button><button onClick={() => moveProduct(1)}>Next →</button></div>
     </aside></div>}
     {cartOpen && <div className="cart-backdrop" onClick={() => setCartOpen(false)}><aside className="blueprint-cart" onClick={event => event.stopPropagation()}><div className="cart-head"><div><span className="quick-label">YOUR SELECTION</span><h2>Cart</h2></div><button onClick={() => setCartOpen(false)}>Close ×</button></div>{!cart.length ? <div className="empty-cart"><h3>Your cart is empty.</h3><p>Select a Saffa dress to start your order.</p><button onClick={() => { setCartOpen(false); setViewMode('circle'); }}>Browse Store</button></div> : <><div className="cart-list">{cart.map(item => <div className="cart-row" key={`${item.slug}-${item.size}`}><img src={item.image} alt=""/><div><strong>{item.name}</strong><small>{item.size} · {item.price.toFixed(2)} LE</small><div className="qty"><button onClick={() => changeQuantity(item.slug,item.size,-1)}>−</button><span>{item.quantity}</span><button onClick={() => changeQuantity(item.slug,item.size,1)}>+</button></div></div><b>{(item.price * item.quantity).toFixed(2)} LE</b></div>)}</div><div className="cart-summary"><div><span>Subtotal</span><b>{subtotal.toFixed(2)} LE</b></div><div><span>Tax</span><span>Calculated at checkout</span></div><div className="cart-total"><strong>Total</strong><strong>{subtotal.toFixed(2)} LE</strong></div></div><button className="checkout-pill" onClick={orderOnWhatsApp}>Checkout via WhatsApp <span>→</span></button></>}</aside></div>}
     <footer className="blueprint-footer"><span>© Saffa Fashion</span><nav><a href="/contact">Contact</a><a href="#">FAQ</a><a href="#">Terms</a><a href="#">Privacy</a><a href={INSTAGRAM_URL} target="_blank" rel="noreferrer">Instagram</a><a href={TIKTOK_URL} target="_blank" rel="noreferrer">TikTok</a></nav></footer>
