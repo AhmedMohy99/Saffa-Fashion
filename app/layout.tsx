@@ -4,6 +4,7 @@ import './white-theme.css';
 import './site-header.css';
 import './rtl.css';
 import './banner.css';
+import './product-detail.css';
 import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
