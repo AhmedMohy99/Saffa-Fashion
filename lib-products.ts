@@ -44,6 +44,26 @@ const twoPieceDescription =
 const twoPieceArDescription =
   'دريس قطعتين مكون من (دريس كَــت بأستيك من الوسط + بلوزة أوفر سايز). تقدري تستغلي كل قطعة لوحدها أو تلبسي القطعتين على بعض لستايل كامل وعملي جداً.';
 
+const twoPieceSharedFields = {
+  description: twoPieceDescription,
+  arDescription: twoPieceArDescription,
+  category: 'summer' as ProductCategory,
+  kind: 'two-piece' as ProductKind,
+  price: 600,
+  originalPrice: 800,
+  saleLabel: 'SALE 20%',
+  sizeOptions: twoPieceSizes,
+  sizeInfo: twoPieceSizeInfo,
+  material: 'Imported Freska linen',
+  arMaterial: 'كتان فريسكا مستورد',
+  availableForInspection: true,
+};
+
+/**
+ * The product colors are ordered intentionally.
+ * Olive is the first/default advertised color.
+ * Each color points to its own real uploaded image.
+ */
 export const products: Product[] = [
   {
     slug: 'most-practical-dress-olive',
@@ -51,24 +71,53 @@ export const products: Product[] = [
     arName: 'الدريس القطعتين',
     color: 'Olive',
     arColor: 'زيتي',
-    // Olive is intentionally the first/default advertised color.
-    // Upload the real Olive image using this exact filename.
     image: `${PRODUCT_PATH}olive.png`,
-    description: twoPieceDescription,
-    arDescription: twoPieceArDescription,
-    category: 'summer',
-    kind: 'two-piece',
-    price: 600,
-    originalPrice: 800,
-    // Keep the campaign label exactly as supplied by the brand.
-    // Although 600 vs 800 is mathematically a 25% reduction, the requested
-    // marketing offer is 20% OFF / SALE, so we do not recalculate it.
-    saleLabel: 'SALE 20%',
-    sizeOptions: twoPieceSizes,
-    sizeInfo: twoPieceSizeInfo,
-    material: 'Imported Freska linen',
-    arMaterial: 'كتان فريسكا مستورد',
-    availableForInspection: true,
+    ...twoPieceSharedFields,
+  },
+  {
+    slug: 'most-practical-dress-brown',
+    name: 'The Most Practical Dress',
+    arName: 'الدريس القطعتين',
+    color: 'Brown',
+    arColor: 'بني',
+    image: `${PRODUCT_PATH}Brown.jpg`,
+    ...twoPieceSharedFields,
+  },
+  {
+    slug: 'most-practical-dress-beige',
+    name: 'The Most Practical Dress',
+    arName: 'الدريس القطعتين',
+    color: 'Beige',
+    arColor: 'بيج',
+    image: `${PRODUCT_PATH}Beige.jpg`,
+    ...twoPieceSharedFields,
+  },
+  {
+    slug: 'most-practical-dress-burgundy',
+    name: 'The Most Practical Dress',
+    arName: 'الدريس القطعتين',
+    color: 'Burgundy',
+    arColor: 'برجاندي',
+    image: `${PRODUCT_PATH}Burgundy.jpg`,
+    ...twoPieceSharedFields,
+  },
+  {
+    slug: 'most-practical-dress-baby-blue',
+    name: 'The Most Practical Dress',
+    arName: 'الدريس القطعتين',
+    color: 'Baby Blue',
+    arColor: 'بيبي بلو',
+    image: `${PRODUCT_PATH}Baby-Blue.jpg`,
+    ...twoPieceSharedFields,
+  },
+  {
+    slug: 'most-practical-dress-kiwi',
+    name: 'The Most Practical Dress',
+    arName: 'الدريس القطعتين',
+    color: 'Kiwi',
+    arColor: 'كيوي',
+    image: `${PRODUCT_PATH}Kiwi.jpg`,
+    ...twoPieceSharedFields,
   },
 ];
 
