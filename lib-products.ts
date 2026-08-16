@@ -186,7 +186,7 @@ export const products: Product[] = [
     arName: 'الفستان المبهج',
     color: 'Beige',
     arColor: 'بيج',
-    image: `${LONG_CHEMISE_PATH}Beige.jpg`,
+    image: `${LONG_CHEMISE_PATH}Beige.png`,
     ...longChemiseSharedFields,
   },
   {
@@ -195,7 +195,7 @@ export const products: Product[] = [
     arName: 'الفستان المبهج',
     color: 'Burgundy',
     arColor: 'برجاندي',
-    image: `${LONG_CHEMISE_PATH}Burgundy.jpg`,
+    image: `${LONG_CHEMISE_PATH}Burgundy.png`,
     ...longChemiseSharedFields,
   },
   {
@@ -204,7 +204,7 @@ export const products: Product[] = [
     arName: 'الفستان المبهج',
     color: 'Turquoise',
     arColor: 'فيروزي',
-    image: `${LONG_CHEMISE_PATH}Turquoise.jpg`,
+    image: `${LONG_CHEMISE_PATH}Turquoise.png`,
     ...longChemiseSharedFields,
   },
   {
@@ -213,7 +213,7 @@ export const products: Product[] = [
     arName: 'الفستان المبهج',
     color: 'Denim Blue',
     arColor: 'أزرق جينز',
-    image: `${LONG_CHEMISE_PATH}Denim-Blue.jpg`,
+    image: `${LONG_CHEMISE_PATH}Denim-Blue.png`,
     ...longChemiseSharedFields,
   },
   {
@@ -222,7 +222,7 @@ export const products: Product[] = [
     arName: 'الفستان المبهج',
     color: 'Pink',
     arColor: 'بينك',
-    image: `${LONG_CHEMISE_PATH}Pink.jpg`,
+    image: `${LONG_CHEMISE_PATH}Pink.png`,
     ...longChemiseSharedFields,
   },
 ];
