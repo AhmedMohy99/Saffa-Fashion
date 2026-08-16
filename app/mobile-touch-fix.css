@@ -1,0 +1,127 @@
+/* Mobile touch / close controls — optimized for iPhone reachability */
+.saffa-mobile-menu-button,
+.saffa-cart-close,
+.saffa-home .swipe-detail-head button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* The mobile menu button becomes a thumb-friendly floating close control while open. */
+@media (max-width: 650px) {
+  .saffa-mobile-menu-button {
+    position: relative;
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    min-height: 52px;
+    padding: 0;
+    border: 1px solid rgba(17,17,17,.14);
+    border-radius: 50%;
+    background: #fff;
+    display: grid;
+    place-items: center;
+    z-index: 1005;
+  }
+
+  .saffa-mobile-menu-button i {
+    position: absolute;
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    margin: 0;
+    background: #111;
+    border-radius: 999px;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+
+  .saffa-mobile-menu-button i:nth-child(1) { transform: translateY(-7px); }
+  .saffa-mobile-menu-button i:nth-child(2) { transform: translateY(0); }
+  .saffa-mobile-menu-button i:nth-child(3) { transform: translateY(7px); }
+
+  .saffa-mobile-menu-button[aria-expanded="true"] {
+    position: fixed;
+    right: 18px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    min-height: 58px;
+    border-color: #111;
+    background: #111;
+    box-shadow: 0 12px 35px rgba(0,0,0,.22);
+  }
+
+  .saffa-mobile-menu-button[aria-expanded="true"] i {
+    width: 24px;
+    background: #fff;
+  }
+
+  .saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(1) { transform: rotate(45deg); }
+  .saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(2) { opacity: 0; transform: scaleX(.3); }
+  .saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(3) { transform: rotate(-45deg); }
+
+  /* Give the menu a little extra bottom room so the floating X never covers a link. */
+  .saffa-mobile-menu {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px) !important;
+  }
+
+  /* Product detail close: large, fixed, thumb-reachable X instead of tiny text. */
+  .saffa-home .swipe-detail-head {
+    position: relative;
+  }
+
+  .saffa-home .swipe-detail-head button {
+    position: fixed;
+    right: 18px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
+    z-index: 250;
+    width: 58px;
+    height: 58px;
+    min-width: 58px;
+    min-height: 58px;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #111;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    box-shadow: 0 12px 35px rgba(0,0,0,.22);
+    font-size: 0;
+    display: grid;
+    place-items: center;
+  }
+
+  .saffa-home .swipe-detail-head button::after {
+    content: '×';
+    font: 300 32px/1 Arial, sans-serif;
+    transform: translateY(-1px);
+  }
+
+  /* Cart drawer close also gets a generous touch target. */
+  .saffa-cart-close {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+    min-height: 52px;
+    border: 1px solid rgba(17,17,17,.14) !important;
+    border-radius: 50% !important;
+    background: #fff !important;
+    color: #111 !important;
+    font-size: 0 !important;
+    display: grid !important;
+    place-items: center;
+  }
+
+  .saffa-cart-close::after {
+    content: '×';
+    font: 300 30px/1 Arial, sans-serif;
+  }
+}
+
+@media (max-width: 380px) {
+  .saffa-mobile-menu-button[aria-expanded="true"],
+  .saffa-home .swipe-detail-head button {
+    right: 14px;
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
+  }
+}
