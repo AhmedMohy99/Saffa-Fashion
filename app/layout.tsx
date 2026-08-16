@@ -8,13 +8,14 @@ import './product-detail.css';
 import './product-detail-layout.css';
 import './showcase-video.css';
 import './saffa-polish.css';
+import './mobile-polish.css';
 import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
   title: 'Saffa Fashion | صفا فاشون',
   description: 'Elegant modest fashion for the modern hijabi.',
   metadataBase: new URL('https://saffafashion.shop'),
-  icons: { icon: '/logo.jpeg' },
+  icons: { icon: '/logo-transparent.png', apple: '/logo-transparent.png' },
   viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
 };
 
