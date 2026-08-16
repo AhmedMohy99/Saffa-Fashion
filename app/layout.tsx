@@ -7,6 +7,7 @@ import './banner.css';
 import './product-detail.css';
 import './product-detail-layout.css';
 import './showcase-video.css';
+import './saffa-polish.css';
 import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
