@@ -40,10 +40,10 @@ const twoPieceSizeInfo: Record<string, string> = {
 };
 
 const twoPieceDescription =
-  'The Most Practical Dress is a two-piece set consisting of a dress with an elasticated waist and an oversized blouse. Each piece can be worn separately, or both pieces can be styled together for a complete, practical and versatile look.';
+  'The Most Practical Dress is a two-piece set made from imported Freska linen. It consists of an elasticated-waist dress and an oversized blouse. Each piece can be worn separately, or both pieces can be styled together for a complete, practical and versatile look.';
 
 const twoPieceArDescription =
-  'دريس قطعتين مكون من دريس كَــت بأستيك من الوسط + بلوزة أوفر سايز. تقدري تستغلي كل قطعة لوحدها أو تلبسي القطعتين على بعض لستايل كامل وعملي جداً.';
+  'الدريس القطعتين مكون من بلوزة أوفر سايز + دريس كات بأستيك من الوسط، من كتان فريسكا مستورده. ممكن كل قطعة تتلبس لوحدها، أو تلبسي القطعتين مع بعض لستايل كامل وعملي جداً. متوفر منه مقاسين: L يلبس من ٥٥ إلى ٧٥ كيلو، وXL يلبس من ٧٦ إلى ١١٠ كيلو.';
 
 const twoPieceSharedFields = {
   description: twoPieceDescription,
@@ -56,7 +56,7 @@ const twoPieceSharedFields = {
   sizeOptions: twoPieceSizes,
   sizeInfo: twoPieceSizeInfo,
   material: 'Imported Freska linen',
-  arMaterial: 'كتان فريسكا مستورد',
+  arMaterial: 'كتان فريسكا مستورده',
   availableForInspection: true,
 };
 
