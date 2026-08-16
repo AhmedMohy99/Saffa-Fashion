@@ -3,6 +3,8 @@ import './device.css';
 import './white-theme.css';
 import './site-header.css';
 import './rtl.css';
+import './banner.css';
+import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
   title: 'Saffa Fashion | صفا فاشون',
@@ -12,4 +14,13 @@ export const metadata = {
   viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) { return <html lang="en"><body>{children}</body></html>; }
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body>
+        <InspectionBanner />
+        {children}
+      </body>
+    </html>
+  );
+}
