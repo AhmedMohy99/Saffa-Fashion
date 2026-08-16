@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import '../mobile-touch-fix.css';
 
 export type SaffaLanguage = 'en' | 'ar';
 
@@ -70,6 +71,6 @@ export default function SaffaHeader({ active = 'home', cartCount, cartAction }: 
         <i /><i /><i />
       </button>
     </div>
-    {mobileOpen && <div className="saffa-mobile-menu"><a href="/" onClick={() => setMobileOpen(false)}>{t.home}</a><a href="/grid" onClick={() => setMobileOpen(false)}>{t.collection}</a><a href="/about" onClick={() => setMobileOpen(false)}>{t.about}</a><a href="/contact" onClick={() => setMobileOpen(false)}>{t.contact}</a><div className="saffa-mobile-language"><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} type="button">English</button><button className={language === 'ar' ? 'active' : ''} onClick={() => setLanguage('ar')} type="button">العربية</button></div></div>}
+    {mobileOpen && <div className="saffa-mobile-menu"><a href="/" onClick={() => setMobileOpen(false)}>{t.home}</a><a href="/grid" onClick={() => setMobileOpen(false)}>{t.collection}</a><a href="/about" onClick={() => setMobileOpen(false)}>{t.about}</a><a href="/contact" onClick={() => setMobileOpen(false)}>{t.contact}</a><div className="saffa-mobile-language"><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} type="button">English</button><button className={language === 'ar' ? 'active' : ''} onClick={() => setLanguage('ar')} type="button">العربية</button></div><button className="saffa-mobile-menu-close" type="button" onClick={() => setMobileOpen(false)} aria-label={t.close}><span aria-hidden="true">×</span><small>{t.close}</small></button></div>}
   </header>;
 }
