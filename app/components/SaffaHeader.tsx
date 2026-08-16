@@ -55,7 +55,7 @@ export default function SaffaHeader({ active = 'home', cartCount, cartAction }: 
 
   return <header className="saffa-site-header">
     <a className="saffa-site-brand" href="/" aria-label="Saffa Fashion home">
-      <img src="/logo-transparent.png" alt="SAFFA FASHION" />
+      <img className="saffa-site-brand-logo" src="/logo-transparent.png" alt="SAFA FASHION" width={112} height={52} decoding="async" />
     </a>
     <nav className="saffa-site-nav" aria-label="Main navigation">
       <a className={active === 'home' ? 'active' : ''} href="/">{t.home}</a>
@@ -66,7 +66,9 @@ export default function SaffaHeader({ active = 'home', cartCount, cartAction }: 
     <div className="saffa-site-actions">
       <div className="saffa-language" aria-label="Language selector"><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} type="button">EN</button><span>/</span><button className={language === 'ar' ? 'active' : ''} onClick={() => setLanguage('ar')} type="button">AR</button></div>
       <button className="saffa-site-cart" type="button" onClick={cartAction || (() => { window.location.href = '/cart'; })} aria-label={`${t.cart}, ${count}`}><CartIcon /><span>{t.cart}</span><b>{count}</b></button>
-      <button className="saffa-mobile-menu-button" type="button" onClick={() => setMobileOpen(value => !value)} aria-expanded={mobileOpen} aria-label={mobileOpen ? t.close : t.menu}><i /><i /></button>
+      <button className="saffa-mobile-menu-button" type="button" onClick={() => setMobileOpen(value => !value)} aria-expanded={mobileOpen} aria-label={mobileOpen ? t.close : t.menu}>
+        <i /><i /><i />
+      </button>
     </div>
     {mobileOpen && <div className="saffa-mobile-menu"><a href="/" onClick={() => setMobileOpen(false)}>{t.home}</a><a href="/grid" onClick={() => setMobileOpen(false)}>{t.collection}</a><a href="/about" onClick={() => setMobileOpen(false)}>{t.about}</a><a href="/contact" onClick={() => setMobileOpen(false)}>{t.contact}</a><div className="saffa-mobile-language"><button className={language === 'en' ? 'active' : ''} onClick={() => setLanguage('en')} type="button">English</button><button className={language === 'ar' ? 'active' : ''} onClick={() => setLanguage('ar')} type="button">العربية</button></div></div>}
   </header>;
