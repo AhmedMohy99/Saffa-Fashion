@@ -15,6 +15,7 @@ export type Product = {
   color: string;
   arColor: string;
   image: string;
+  images?: string[];
   description: string;
   arDescription: string;
   category: ProductCategory;
@@ -32,6 +33,7 @@ export type Product = {
 const TWO_PIECE_PATH = '/product/most-practical-dress/';
 // IMPORTANT: the GitHub folder is named `long-chemis` (without the final `e`).
 const LONG_CHEMISE_PATH = '/product/long-chemis/';
+const VELVET_BLAZER_DRESS_PATH = '/product/velvet-blazer-dress/';
 
 const twoPieceSizes: ProductSize[] = ['L', 'XL'];
 
@@ -112,6 +114,48 @@ const longChemiseSharedFields = {
   sizeInfo: longChemiseSizeInfo,
   material: 'Textured printed linen',
   arMaterial: 'كتان طباعة بارزة',
+  availableForInspection: true,
+};
+
+const velvetBlazerDressDescription =
+  'Velvet Blazer Dress combines the luxury of soft imported velvet with the structure and elegance of a modern blazer. Its fitted waist creates a polished silhouette, while the gold stainless-steel buttons add a refined finishing touch. Wear it closed as a complete dress or open as an elegant cardigan.';
+
+const velvetBlazerDressArDescription = `✨ فستان بليزر قطيفة – الأناقة الفاخرة في إطلالة واحدة!
+
+تصميم يجمع بين فخامة القطيفة وأناقة البليزر العصرية، ليمنحكِ إطلالة راقية وجذابة في مختلف المناسبات.
+
+مميزات التصميم:
+
+قصّة مجسّمة وأنيقة: مزوّد بحزام ثابت عند الوسط لتحديد القوام وتجسيم الجسم بشكل مريح وجذاب.
+
+لمسة ذهبية فاخرة: مزيّن بأزرار استانلس ذهبية مقاومة لتغيّر اللون، تضيف رونقاً وفخامة استثنائية.
+
+مرونة في التنسيق: يمكن ارتداؤه مقفولاً كدريس كامل أو تنسيقه مفتوحاً ككارديجان راقٍ.
+
+المواصفات:
+
+الخامة: قطيفة مستوردة ناعمة جداً عالية الجودة تمنحكِ الدفء والراحة.
+
+المقاس: وان سايز (Free Size) مريح يلبس حتى 90 كجم.
+
+العرض الخاص:
+
+السعر: 1,200 جنيه فقط بدلاً من 1,500 جنيه.`;
+
+const velvetBlazerDressSharedFields = {
+  description: velvetBlazerDressDescription,
+  arDescription: velvetBlazerDressArDescription,
+  category: 'winter' as ProductCategory,
+  kind: 'blazer-dress' as ProductKind,
+  price: 1200,
+  originalPrice: 1500,
+  saleLabel: 'SPECIAL OFFER · SALE 20%',
+  sizeOptions: ['FREE SIZE'] as ProductSize[],
+  sizeInfo: {
+    'FREE SIZE': 'Up to 90 kg',
+  },
+  material: 'Imported premium velvet',
+  arMaterial: 'قطيفة مستوردة ناعمة جداً عالية الجودة',
   availableForInspection: true,
 };
 
@@ -214,6 +258,19 @@ export const products: Product[] = [
     arColor: 'بينك',
     image: `${LONG_CHEMISE_PATH}Pink.png`,
     ...longChemiseSharedFields,
+  },
+  {
+    slug: 'velvet-blazer-dress',
+    name: 'Velvet Blazer Dress',
+    arName: 'فستان بليزر قطيفة',
+    color: 'Black',
+    arColor: 'أسود',
+    image: `${VELVET_BLAZER_DRESS_PATH}velvet-blazer-dress-01.jpg`,
+    images: [
+      `${VELVET_BLAZER_DRESS_PATH}velvet-blazer-dress-01.jpg`,
+      `${VELVET_BLAZER_DRESS_PATH}velvet-blazer-dress-02.jpg`,
+    ],
+    ...velvetBlazerDressSharedFields,
   },
 ];
 
