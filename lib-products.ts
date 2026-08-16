@@ -40,10 +40,26 @@ const twoPieceSizeInfo: Record<string, string> = {
 };
 
 const twoPieceDescription =
-  'The Most Practical Dress is a two-piece set made from imported Freska linen. It consists of an elasticated-waist dress and an oversized blouse. Each piece can be worn separately, or both pieces can be styled together for a complete, practical and versatile look.';
+  'The Most Practical Dress is a 2-in-1 two-piece set made from imported Freska linen. It includes an oversized blouse and a dress with an elasticated waist. Each piece can be worn separately, or both pieces can be styled together for a complete, practical and versatile look.';
 
-const twoPieceArDescription =
-  'الدريس القطعتين مكون من بلوزة أوفر سايز + دريس كات بأستيك من الوسط، من كتان فريسكا مستورده. ممكن كل قطعة تتلبس لوحدها، أو تلبسي القطعتين مع بعض لستايل كامل وعملي جداً. متوفر منه مقاسين: L يلبس من ٥٥ إلى ٧٥ كيلو، وXL يلبس من ٧٦ إلى ١١٠ كيلو.';
+const twoPieceArDescription = `✨ **دريس 2 في 1 – الأناقة والعملية في طقم واحد!**
+
+تصميم ذكي يمنحكِ أقصى درجات الراحة والمرونة لتنسيق أكثر من إطلالة بكل سهولة.
+
+**تفاصيل التصميم:**
+
+- **بلوزة أوفر سايز (Oversized):** بتصميم عصري ومريح يناسب يومكِ بأسلوب راقٍ.
+- **دريس بأستيك مرن من الوسط:** يحدد الخصر بشكل مريح وأنيق دون أي تقييد للحركة.
+- **حرية التنسيق:** اعتمدي كل قطعة منفردة لتنسيقات مختلفة، أو اجمعيهما معاً لإطلالة متكاملة، عملية، وجذابة.
+
+**الخامة:**
+
+- **كتان فريسكا مستورد:** خامة فاخرة عالية الجودة، خفيفة على البشرة، وتضمن لكِ الراحة والانتعاش طوال اليوم.
+
+**جدول المقاسات:**
+
+- **L:** مناسب من 55 إلى 75 كجم
+- **XL:** مناسب من 76 إلى 110 كجم`;
 
 const twoPieceSharedFields = {
   description: twoPieceDescription,
