@@ -1,0 +1,74 @@
+/* Saffa Fashion responsive brand + mobile polish */
+
+.saffa-site-header{height:78px;padding:0 clamp(20px,5.4vw,78px);grid-template-columns:1fr auto 1fr}
+.saffa-site-brand{width:128px;height:58px;display:flex;align-items:center;justify-content:flex-start;overflow:visible}
+.saffa-site-brand-logo{display:block!important;width:116px!important;height:54px!important;max-width:none!important;max-height:none!important;object-fit:contain!important;object-position:left center!important;margin:0!important;padding:0!important}
+.saffa-site-actions{gap:18px}
+.saffa-mobile-menu-button{position:relative;width:46px;height:46px;min-width:46px;border:1px solid rgba(17,17,17,.18);border-radius:50%;background:#fff;box-shadow:0 5px 18px rgba(0,0,0,.08);gap:5px;transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease}
+.saffa-mobile-menu-button:hover{box-shadow:0 8px 24px rgba(0,0,0,.12);border-color:rgba(17,17,17,.3)}
+.saffa-mobile-menu-button i{width:20px;height:1.5px;background:#111;transform-origin:center;transition:transform .22s ease,opacity .18s ease,width .18s ease}
+.saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(2){opacity:0}
+.saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+.saffa-mobile-menu{top:calc(100% + 10px);left:16px;right:16px;border:1px solid rgba(17,17,17,.1);border-radius:22px;padding:8px;background:rgba(255,255,255,.98);box-shadow:0 24px 70px rgba(0,0,0,.14);backdrop-filter:blur(18px)}
+.saffa-mobile-menu>a{min-height:52px;display:flex;align-items:center;padding:15px 14px;font-size:10px}
+.saffa-site-cart{min-height:46px;gap:8px}
+.saffa-site-cart b{width:28px;height:28px;font-size:11px;background:#fff}
+
+/* Product-detail collection hierarchy */
+.detail-grid .kicker{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:20px}
+.detail-collection-label{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;font-family:Georgia,'Times New Roman',serif;font-size:13px;font-weight:400;line-height:1;letter-spacing:.34em;color:#a27d43;text-transform:uppercase;margin:2px 0 12px}
+.detail-collection-label::before,.detail-collection-label::after{content:"";display:block;width:42px;height:1px;background:currentColor;opacity:.55}
+.detail-color-label{font-size:10px;font-weight:800;letter-spacing:.22em;color:#777;text-transform:uppercase}
+
+/* Large, touch-friendly close controls for overlays */
+.saffa-home .swipe-detail-head button,.saffa-cart-close{width:48px;height:48px;min-width:48px;border:1px solid rgba(17,17,17,.14)!important;border-radius:50%;background:#fff!important;color:#111!important;display:grid;place-items:center;padding:0!important;font:400 30px/1 Arial,sans-serif!important;line-height:1!important;box-shadow:0 7px 22px rgba(0,0,0,.08);-webkit-tap-highlight-color:transparent}
+.saffa-home .swipe-detail-head button{font-size:0!important}
+.saffa-home .swipe-detail-head button::before{content:"×";font:400 30px/1 Arial,sans-serif}
+.saffa-home .swipe-detail-head button:focus-visible,.saffa-cart-close:focus-visible{outline:3px solid rgba(17,17,17,.22);outline-offset:3px}
+
+@media(max-width:900px){
+  .saffa-site-header{height:72px;padding:0 20px;grid-template-columns:auto 1fr}
+  .saffa-site-brand{width:104px;height:54px}
+  .saffa-site-brand-logo{width:96px!important;height:50px!important}
+  .saffa-site-actions{gap:10px}
+  .saffa-site-cart{padding:0 2px}
+  .saffa-site-cart span{display:none}
+  .saffa-mobile-menu-button{display:flex;width:48px;height:48px;min-width:48px}
+  .detail-collection-label{font-size:12px;letter-spacing:.3em}
+}
+
+@media(max-width:600px){
+  .saffa-site-header{height:70px;padding:0 18px}
+  .saffa-site-brand{width:92px;height:52px}
+  .saffa-site-brand-logo{width:86px!important;height:48px!important}
+  .saffa-site-actions{gap:8px}
+  .saffa-site-cart{min-width:70px;justify-content:flex-end}
+  .saffa-site-cart b{width:30px;height:30px;font-size:11px}
+  .saffa-cart-icon{width:22px;height:22px}
+  .saffa-mobile-menu-button{width:48px;height:48px;min-width:48px}
+  .saffa-mobile-menu{top:calc(100% + 8px);left:10px;right:10px;border-radius:20px}
+
+  .detail > .container{width:calc(100% - 28px);padding-top:16px}
+  .detail-grid{gap:18px}
+  .detail-collection-label{font-size:11px;letter-spacing:.25em;gap:10px;margin:0 0 10px}
+  .detail-collection-label::before,.detail-collection-label::after{width:28px}
+  .detail-grid .kicker{gap:8px;margin-bottom:12px}
+  .detail-color-label{font-size:9px;letter-spacing:.2em}
+  .detail-grid h1.serif{font-size:clamp(40px,11vw,52px)!important;line-height:.94!important;letter-spacing:-.045em!important;margin-bottom:12px!important}
+  .detail-price{font-size:20px;gap:9px}
+
+  .saffa-home .swipe-detail{width:100%;height:100%;padding:18px 18px 28px}
+  .saffa-home .swipe-detail-head{min-height:52px;align-items:center}
+  .saffa-home .swipe-detail-head button,.saffa-cart-close{width:50px;height:50px;min-width:50px}
+  .saffa-home .swipe-detail-image{height:43vh;margin:18px 0 20px}
+}
+
+@media(max-width:390px){
+  .saffa-site-header{padding:0 14px}
+  .saffa-site-brand{width:84px}
+  .saffa-site-brand-logo{width:80px!important}
+  .saffa-mobile-menu-button{width:46px;height:46px;min-width:46px}
+  .saffa-site-cart{min-width:62px}
+  .detail-collection-label{font-size:10px;letter-spacing:.2em}
+}
