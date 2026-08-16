@@ -42,24 +42,26 @@ const twoPieceSizeInfo: Record<string, string> = {
 const twoPieceDescription =
   'The Most Practical Dress is a 2-in-1 two-piece set made from imported Freska linen. It includes an oversized blouse and a dress with an elasticated waist. Each piece can be worn separately, or both pieces can be styled together for a complete, practical and versatile look.';
 
-const twoPieceArDescription = `✨ **دريس 2 في 1 – الأناقة والعملية في طقم واحد!**
+const twoPieceArDescription = `✨ دريس 2 في 1 – الأناقة والعملية في طقم واحد!
 
 تصميم ذكي يمنحكِ أقصى درجات الراحة والمرونة لتنسيق أكثر من إطلالة بكل سهولة.
 
-**تفاصيل التصميم:**
+تفاصيل التصميم:
 
-- **بلوزة أوفر سايز (Oversized):** بتصميم عصري ومريح يناسب يومكِ بأسلوب راقٍ.
-- **دريس بأستيك مرن من الوسط:** يحدد الخصر بشكل مريح وأنيق دون أي تقييد للحركة.
-- **حرية التنسيق:** اعتمدي كل قطعة منفردة لتنسيقات مختلفة، أو اجمعيهما معاً لإطلالة متكاملة، عملية، وجذابة.
+بلوزة أوفر سايز (Oversized): بتصميم عصري ومريح يناسب يومكِ بأسلوب راقٍ.
 
-**الخامة:**
+دريس بأستيك مرن من الوسط: يحدد الخصر بشكل مريح وأنيق دون أي تقييد للحركة.
 
-- **كتان فريسكا مستورد:** خامة فاخرة عالية الجودة، خفيفة على البشرة، وتضمن لكِ الراحة والانتعاش طوال اليوم.
+حرية التنسيق: اعتمدي كل قطعة منفردة لتنسيقات مختلفة، أو اجمعيهما معاً لإطلالة متكاملة، عملية، وجذابة.
 
-**جدول المقاسات:**
+الخامة:
 
-- **L:** مناسب من 55 إلى 75 كجم
-- **XL:** مناسب من 76 إلى 110 كجم`;
+كتان فريسكا مستورد: خامة فاخرة عالية الجودة، خفيفة على البشرة، وتضمن لكِ الراحة والانتعاش طوال اليوم.
+
+جدول المقاسات:
+
+L: مناسب من 55 إلى 75 كجم
+XL: مناسب من 76 إلى 110 كجم`;
 
 const twoPieceSharedFields = {
   description: twoPieceDescription,
@@ -77,10 +79,21 @@ const twoPieceSharedFields = {
 };
 
 const longChemiseDescription =
-  'The Joyful Dress is an elegant and comfortable long chemise / shirt dress made from textured printed linen. It comes with a waist belt that defines the silhouette and gives the dress a flattering, modern shape. Free size up to 110 kg.';
+  'The Joyful Dress is an elegant and comfortable Long Chemise / Shirt Dress made from textured printed linen. It comes with a waist belt that defines the silhouette and gives the dress a flattering, modern shape. Free size up to 110 kg.';
 
-const longChemiseArDescription =
-  'لونج شميز / شميز دريس أنيق ومريح، من كتان طباعة بارزة، مزود بحزام من الوسط عشان يحدد القوام وياخد شكل الجسم بأسلوب مبهج وعصري.';
+const longChemiseArDescription = `لونج شميز / شميز دريس أنيق ومريح، بتصميم مبهج وعصري.
+
+تفاصيل التصميم:
+
+لونج شميز أو شميز دريس بتصميم أنيق ومريح، مزود بحزام من الوسط عشان يحدد القوام وياخد شكل الجسم بطريقة أنيقة ومريحة.
+
+الخامة:
+
+كتان طباعة بارزة، بخامة مميزة تضيف شكل وملمس أنيق للتصميم.
+
+المقاس:
+
+Free Size: يلبس حتى 110 كيلو.`;
 
 const longChemiseSizeInfo: Record<string, string> = {
   'FREE SIZE': 'Up to 110 kg',
