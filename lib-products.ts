@@ -29,7 +29,8 @@ export type Product = {
   availableForInspection?: boolean;
 };
 
-const PRODUCT_PATH = '/product/most-practical-dress/';
+const TWO_PIECE_PATH = '/product/most-practical-dress/';
+const LONG_CHEMISE_PATH = '/product/long-chemise/';
 
 const twoPieceSizes: ProductSize[] = ['L', 'XL'];
 
@@ -39,10 +40,10 @@ const twoPieceSizeInfo: Record<string, string> = {
 };
 
 const twoPieceDescription =
-  'The Most Practical Dress is a two-piece modest set consisting of a dress with an elasticated waist and an oversized blouse. Each piece can be worn separately, or both pieces can be styled together for a complete, practical look.';
+  'The Most Practical Dress is a two-piece set consisting of a dress with an elasticated waist and an oversized blouse. Each piece can be worn separately, or both pieces can be styled together for a complete, practical and versatile look.';
 
 const twoPieceArDescription =
-  'دريس قطعتين مكون من (دريس كَــت بأستيك من الوسط + بلوزة أوفر سايز). تقدري تستغلي كل قطعة لوحدها أو تلبسي القطعتين على بعض لستايل كامل وعملي جداً.';
+  'دريس قطعتين مكون من دريس كَــت بأستيك من الوسط + بلوزة أوفر سايز. تقدري تستغلي كل قطعة لوحدها أو تلبسي القطعتين على بعض لستايل كامل وعملي جداً.';
 
 const twoPieceSharedFields = {
   description: twoPieceDescription,
@@ -59,19 +60,46 @@ const twoPieceSharedFields = {
   availableForInspection: true,
 };
 
+const longChemiseDescription =
+  'The Joyful Dress is an elegant and comfortable long chemise / shirt dress made from textured printed linen. It comes with a waist belt that defines the silhouette and gives the dress a flattering, modern shape. Free size up to 110 kg.';
+
+const longChemiseArDescription =
+  'لونج شميز / شميز دريس أنيق ومريح، من كتان طباعة بارزة، مزود بحزام من الوسط عشان يحدد القوام وياخد شكل الجسم بأسلوب مبهج وعصري.';
+
+const longChemiseSizeInfo: Record<string, string> = {
+  'FREE SIZE': 'Up to 110 kg',
+};
+
+const longChemiseSharedFields = {
+  description: longChemiseDescription,
+  arDescription: longChemiseArDescription,
+  category: 'summer' as ProductCategory,
+  kind: 'long-shirt' as ProductKind,
+  price: 700,
+  originalPrice: 950,
+  saleLabel: 'SALE 20%',
+  sizeOptions: ['FREE SIZE'] as ProductSize[],
+  sizeInfo: longChemiseSizeInfo,
+  material: 'Textured printed linen',
+  arMaterial: 'كتان طباعة بارزة',
+  availableForInspection: true,
+};
+
 /**
- * The product colors are ordered intentionally.
- * Olive is the first/default advertised color.
- * Each color points to its own real uploaded image.
+ * Product variants are ordered by the brand's preferred/default color.
+ * Every color has its own image path so the UI can switch images by color.
  */
 export const products: Product[] = [
+  // =========================================================
+  // THE MOST PRACTICAL DRESS — الدريس القطعتين
+  // =========================================================
   {
     slug: 'most-practical-dress-olive',
     name: 'The Most Practical Dress',
     arName: 'الدريس القطعتين',
     color: 'Olive',
     arColor: 'زيتي',
-    image: `${PRODUCT_PATH}olive.png`,
+    image: `${TWO_PIECE_PATH}olive.png`,
     ...twoPieceSharedFields,
   },
   {
@@ -80,7 +108,7 @@ export const products: Product[] = [
     arName: 'الدريس القطعتين',
     color: 'Brown',
     arColor: 'بني',
-    image: `${PRODUCT_PATH}Brown.jpg`,
+    image: `${TWO_PIECE_PATH}Brown.jpg`,
     ...twoPieceSharedFields,
   },
   {
@@ -89,7 +117,7 @@ export const products: Product[] = [
     arName: 'الدريس القطعتين',
     color: 'Beige',
     arColor: 'بيج',
-    image: `${PRODUCT_PATH}Beige.jpg`,
+    image: `${TWO_PIECE_PATH}Beige.jpg`,
     ...twoPieceSharedFields,
   },
   {
@@ -98,7 +126,7 @@ export const products: Product[] = [
     arName: 'الدريس القطعتين',
     color: 'Burgundy',
     arColor: 'برجاندي',
-    image: `${PRODUCT_PATH}Burgundy.jpg`,
+    image: `${TWO_PIECE_PATH}Burgundy.jpg`,
     ...twoPieceSharedFields,
   },
   {
@@ -107,7 +135,7 @@ export const products: Product[] = [
     arName: 'الدريس القطعتين',
     color: 'Baby Blue',
     arColor: 'بيبي بلو',
-    image: `${PRODUCT_PATH}Baby-Blue.jpg`,
+    image: `${TWO_PIECE_PATH}Baby-Blue.jpg`,
     ...twoPieceSharedFields,
   },
   {
@@ -116,8 +144,57 @@ export const products: Product[] = [
     arName: 'الدريس القطعتين',
     color: 'Kiwi',
     arColor: 'كيوي',
-    image: `${PRODUCT_PATH}Kiwi.jpg`,
+    image: `${TWO_PIECE_PATH}Kiwi.jpg`,
     ...twoPieceSharedFields,
+  },
+
+  // =========================================================
+  // THE JOYFUL DRESS — الفستان المبهج / LONG CHEMISE
+  // =========================================================
+  {
+    slug: 'joyful-dress-beige',
+    name: 'The Joyful Dress',
+    arName: 'الفستان المبهج',
+    color: 'Beige',
+    arColor: 'بيج',
+    image: `${LONG_CHEMISE_PATH}Beige.jpg`,
+    ...longChemiseSharedFields,
+  },
+  {
+    slug: 'joyful-dress-burgundy',
+    name: 'The Joyful Dress',
+    arName: 'الفستان المبهج',
+    color: 'Burgundy',
+    arColor: 'برجاندي',
+    image: `${LONG_CHEMISE_PATH}Burgundy.jpg`,
+    ...longChemiseSharedFields,
+  },
+  {
+    slug: 'joyful-dress-turquoise',
+    name: 'The Joyful Dress',
+    arName: 'الفستان المبهج',
+    color: 'Turquoise',
+    arColor: 'فيروزي',
+    image: `${LONG_CHEMISE_PATH}Turquoise.jpg`,
+    ...longChemiseSharedFields,
+  },
+  {
+    slug: 'joyful-dress-denim-blue',
+    name: 'The Joyful Dress',
+    arName: 'الفستان المبهج',
+    color: 'Denim Blue',
+    arColor: 'أزرق جينز',
+    image: `${LONG_CHEMISE_PATH}Denim-Blue.jpg`,
+    ...longChemiseSharedFields,
+  },
+  {
+    slug: 'joyful-dress-pink',
+    name: 'The Joyful Dress',
+    arName: 'الفستان المبهج',
+    color: 'Pink',
+    arColor: 'بينك',
+    image: `${LONG_CHEMISE_PATH}Pink.jpg`,
+    ...longChemiseSharedFields,
   },
 ];
 
