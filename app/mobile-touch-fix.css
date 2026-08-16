@@ -60,12 +60,20 @@
   .saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(2) { opacity: 0; transform: scaleX(.3); }
   .saffa-mobile-menu-button[aria-expanded="true"] i:nth-child(3) { transform: rotate(-45deg); }
 
-  /* Give the menu a little extra bottom room so the floating X never covers a link. */
   .saffa-mobile-menu {
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px) !important;
   }
 
-  /* Product detail close: large, fixed, thumb-reachable X instead of tiny text. */
+  /* When a product detail overlay is open, hide the normal header bar completely.
+     This prevents the menu/cart controls from sitting over the product experience. */
+  .saffa-home:has(.swipe-detail-backdrop) .saffa-site-header {
+    transform: translateY(-110%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform .25s ease, opacity .2s ease;
+  }
+
+  /* Product detail close: large, fixed, thumb-reachable X. */
   .saffa-home .swipe-detail-head {
     position: relative;
   }
@@ -97,7 +105,6 @@
     transform: translateY(-1px);
   }
 
-  /* Cart drawer close also gets a generous touch target. */
   .saffa-cart-close {
     width: 52px;
     height: 52px;
