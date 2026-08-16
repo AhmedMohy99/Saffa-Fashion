@@ -6,6 +6,7 @@ import './rtl.css';
 import './banner.css';
 import './product-detail.css';
 import './product-detail-layout.css';
+import './showcase-video.css';
 import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
