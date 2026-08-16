@@ -30,7 +30,8 @@ export type Product = {
 };
 
 const TWO_PIECE_PATH = '/product/most-practical-dress/';
-const LONG_CHEMISE_PATH = '/product/long-chemise/';
+// IMPORTANT: the GitHub folder is named `long-chemis` (without the final `e`).
+const LONG_CHEMISE_PATH = '/product/long-chemis/';
 
 const twoPieceSizes: ProductSize[] = ['L', 'XL'];
 
@@ -114,14 +115,7 @@ const longChemiseSharedFields = {
   availableForInspection: true,
 };
 
-/**
- * Product variants are ordered by the brand's preferred/default color.
- * Every color has its own image path so the UI can switch images by color.
- */
 export const products: Product[] = [
-  // =========================================================
-  // THE MOST PRACTICAL DRESS — الدريس القطعتين
-  // =========================================================
   {
     slug: 'most-practical-dress-olive',
     name: 'The Most Practical Dress',
@@ -176,10 +170,6 @@ export const products: Product[] = [
     image: `${TWO_PIECE_PATH}Kiwi.jpg`,
     ...twoPieceSharedFields,
   },
-
-  // =========================================================
-  // THE JOYFUL DRESS — الفستان المبهج / LONG CHEMISE
-  // =========================================================
   {
     slug: 'joyful-dress-beige',
     name: 'The Joyful Dress',
