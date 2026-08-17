@@ -40,7 +40,8 @@
 
   .saffa-mobile-menu-button[aria-expanded="true"] {
     position: fixed;
-    right: 18px;
+    left: 18px;
+    right: auto;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
     width: 58px;
     height: 58px;
@@ -73,14 +74,15 @@
     transition: transform .25s ease, opacity .2s ease;
   }
 
-  /* Product detail close: large, fixed, thumb-reachable X. */
+  /* Product detail close: large, fixed, left-side X so it never covers product text. */
   .saffa-home .swipe-detail-head {
     position: relative;
   }
 
   .saffa-home .swipe-detail-head button {
     position: fixed;
-    right: 18px;
+    left: 18px;
+    right: auto;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 18px);
     z-index: 250;
     width: 58px;
@@ -128,7 +130,8 @@
 @media (max-width: 380px) {
   .saffa-mobile-menu-button[aria-expanded="true"],
   .saffa-home .swipe-detail-head button {
-    right: 14px;
+    left: 14px;
+    right: auto;
     bottom: calc(env(safe-area-inset-bottom, 0px) + 14px);
   }
 }
