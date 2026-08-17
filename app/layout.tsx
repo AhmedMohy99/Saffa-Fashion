@@ -9,6 +9,9 @@ import './product-detail-layout.css';
 import './showcase-video.css';
 import './saffa-polish.css';
 import './mobile-polish.css';
+import './product-gallery.css';
+import './header-fix.css';
+import './grid/grid.css';
 import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
@@ -16,16 +19,8 @@ export const metadata = {
   description: 'Elegant modest fashion for the modern hijabi.',
   metadataBase: new URL('https://saffafashion.shop'),
   icons: { icon: '/logo-transparent.png', apple: '/logo-transparent.png' },
-  viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <body>
-        <InspectionBanner />
-        {children}
-      </body>
-    </html>
-  );
+  return <html lang="en"><body><InspectionBanner />{children}</body></html>;
 }
