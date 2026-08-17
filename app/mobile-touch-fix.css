@@ -64,8 +64,8 @@
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 96px) !important;
   }
 
-  /* Product detail is its own interaction layer. Hide the menu button here so
-     it cannot create the duplicate X shown on top of the product page. */
+  /* Product detail owns the close control. Hide the normal mobile menu while
+     the detail layer is open so there can never be a second X. */
   .saffa-home:has(.swipe-detail-backdrop) .saffa-site-header {
     transform: translateY(-110%);
     opacity: 0;
@@ -77,39 +77,61 @@
     display: none !important;
   }
 
-  /* Product close button: place it in the EMPTY upper-right area beside the
-     product image, never over the product title/description/action buttons. */
-  .saffa-home .swipe-detail-head {
-    position: relative;
+  /* IMPORTANT: the close button belongs in the blank area beside the model,
+     not beside the title/description. On iPhone the product image occupies
+     the upper section, so keep the X high and to the right. */
+  .saffa-home .swipe-detail-head button {
+    position: fixed !important;
+    top: 178px !important;
+    right: 18px !important;
+    left: auto !important;
+    bottom: auto !important;
+    z-index: 9999 !important;
+    width: 52px !important;
+    height: 52px !important;
+    min-width: 52px !important;
+    min-height: 52px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: 1px solid rgba(17,17,17,.14) !important;
+    border-radius: 50% !important;
+    background: rgba(255,255,255,.97) !important;
+    color: transparent !important;
+    box-shadow: 0 6px 22px rgba(0,0,0,.10) !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    text-indent: -9999px !important;
+    overflow: hidden !important;
+    display: grid !important;
+    place-items: center !important;
   }
 
-  .saffa-home .swipe-detail-head button {
-    position: fixed;
-    top: calc(var(--saffa-banner-h, 34px) + 20px);
-    right: 18px;
-    left: auto;
-    bottom: auto;
-    z-index: 250;
-    width: 52px;
-    height: 52px;
-    min-width: 52px;
-    min-height: 52px;
-    padding: 0;
-    margin: 0;
-    border: 1px solid rgba(17,17,17,.14);
-    border-radius: 50%;
-    background: rgba(255,255,255,.96);
-    color: #111;
-    box-shadow: 0 6px 22px rgba(0,0,0,.10);
-    font-size: 0;
-    display: grid;
-    place-items: center;
+  /* Draw exactly ONE X. The original "Close ×" text is hidden above, which
+     fixes the two-X problem visible in the screenshot. */
+  .saffa-home .swipe-detail-head button::before {
+    content: '' !important;
+    position: absolute !important;
+    width: 20px !important;
+    height: 2px !important;
+    background: #111 !important;
+    border-radius: 999px !important;
+    transform: rotate(45deg) !important;
+    left: 15px !important;
+    top: 25px !important;
+    display: block !important;
   }
 
   .saffa-home .swipe-detail-head button::after {
-    content: '×';
-    font: 300 30px/1 Arial, sans-serif;
-    transform: translateY(-1px);
+    content: '' !important;
+    position: absolute !important;
+    width: 20px !important;
+    height: 2px !important;
+    background: #111 !important;
+    border-radius: 999px !important;
+    transform: rotate(-45deg) !important;
+    left: 15px !important;
+    top: 25px !important;
+    display: block !important;
   }
 
   .saffa-cart-close {
@@ -120,8 +142,9 @@
     border: 1px solid rgba(17,17,17,.14) !important;
     border-radius: 50% !important;
     background: #fff !important;
-    color: #111 !important;
+    color: transparent !important;
     font-size: 0 !important;
+    text-indent: -9999px !important;
     display: grid !important;
     place-items: center;
   }
@@ -129,13 +152,15 @@
   .saffa-cart-close::after {
     content: '×';
     font: 300 30px/1 Arial, sans-serif;
+    color: #111;
+    text-indent: 0;
   }
 }
 
 @media (max-width: 380px) {
   .saffa-home .swipe-detail-head button {
-    top: calc(var(--saffa-banner-h, 30px) + 16px);
-    right: 14px;
+    top: 170px !important;
+    right: 14px !important;
   }
 
   .saffa-mobile-menu-button[aria-expanded="true"] {
