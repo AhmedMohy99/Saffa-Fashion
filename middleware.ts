@@ -3,6 +3,15 @@ import { NextRequest, NextResponse } from 'next/server';
 const COOKIE_NAME = 'saffa_admin_session';
 const SESSION_TTL = 60 * 60 * 8;
 
+function toBase64Url(bytes: Uint8Array) {
+  let binary = '';
+  for (let i = 0; i < bytes.length; i += 1) binary += String.fromCharCode(bytes[i]);
+  return btoa(binary)
+    .replaceAll('+', '-')
+    .replaceAll('/', '_')
+    .replaceAll('=', '');
+}
+
 async function sign(value: string, secret: string) {
   const key = await crypto.subtle.importKey(
     'raw',
@@ -12,10 +21,7 @@ async function sign(value: string, secret: string) {
     ['sign'],
   );
   const signature = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(value));
-  return btoa(String.fromCharCode(...new Uint8Array(signature)))
-    .replaceAll('+', '-')
-    .replaceAll('/', '_')
-    .replaceAll('=', '');
+  return toBase64Url(new Uint8Array(signature));
 }
 
 async function isValidSession(request: NextRequest) {
