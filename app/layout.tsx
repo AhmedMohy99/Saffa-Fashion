@@ -11,6 +11,7 @@ import './saffa-polish.css';
 import './mobile-polish.css';
 import './product-gallery.css';
 import './header-fix.css';
+import './store-enhancements.css';
 import InspectionBanner from './components/InspectionBanner';
 
 export const metadata = {
